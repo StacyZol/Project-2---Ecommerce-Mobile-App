@@ -1,0 +1,47 @@
+FEATURE 1: Allow Users to search products by product-related criteria such as name, price, availability, etc.
+ 		Conditional - A search bar that will return results according to search as well as a filter button. 
+ 		User Stories:
+ 		As a user, I should be able to search through the products by name, price, ratings, etc.
+ 		As a user, after the search results come up, I should be able to then click on an item to get more information add it to my shopping cart. 
+ 		As a user, I should be able to view my past searches.
+
+
+ FEATURE 2: Users should be able to add/remove/modify products in the shopping cart.
+ 		Conditional a - Users can add items to shopping cart. 
+ 		Conditional b - Users can remove products from the shopping cart.
+  		Conditional c - Users can modify quantity of the product in the shopping cart
+ 		User Stories:
+ 		As a user, I should be able to add items to the shopping cart.
+ 		As a user, I should be able to remove items from the shopping cart.
+ 		As a user, I should be able to modify the quantity of the product.
+
+ 
+ FEATURE 3: Users should be able to view details of an item by clicking on it. 
+ 		Conditional a- All items on the list is clickable and open up details such as description, price, name, reviews. 
+ 		Conditional b - Users can add each item to the shopping cart from the detail view. 
+ 		User Stories:
+ 		As a user, I should be able to tap on an item on the list and be able to see additional information. 
+ 		As a user, I should be able to add the item to the cart. 
+ 
+FEATURE 4: The shopping cart should be accessible throughout the lifetime of the app
+		Conditional - The user can access the shopping cart from any screen. 
+		User Stories:
+		As a user, I should be able to view the items in the shopping cart whenever I want.
+		As a user, I should be able to see how many items I have in the shopping cart without looking in it.
+
+FEATURE 5: Users can check out the shopping cart
+		Conditional a- The user can check out their order. 
+		Conditional b - If the shopping cart is empty, an Alert Dialog will pop up saying a note it's empty.
+		User stories:
+		As a user, I should be able to check out the items I want to buy.
+		As a user, I should be able to see an empty shopping cart when I haven't added anything. 
+
+Additional features that would be ideal to have but might be difficult. 
+FEATURE 5: Users should be able to log in. 
+FEATURE 6: Users should be able to create an account. 
+FEATURE 7: The app will have a navigation drawer. 
+FEATURE 8: The app will have a "info" icon at the top that displays information about each store.
+FEATURE 9: The app will have a checkout option of credit card, android pay, PayPal or cash.
+FEATURE 10: The app will have stars to indicate ratings
+FEATURE 11: The app will have reviews submitted by users
+FEATURE 12: The app will display "# of entries found" when doing a search criteria. 
