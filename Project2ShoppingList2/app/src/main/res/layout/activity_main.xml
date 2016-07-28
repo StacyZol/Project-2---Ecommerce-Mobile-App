@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.stacyzolnikov.project2shoppinglist2.MainActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"/>
+
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="80dp"
+        android:text="Let's Go!"
+        android:textSize="30dp"
+        android:background="@drawable/shape"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        android:id="@+id/LetsGoButton"
+        />
+</FrameLayout>

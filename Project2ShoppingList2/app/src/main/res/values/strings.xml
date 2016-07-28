@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Stores</string>
+    <string name="search_hint_dispensary">Search for a store</string>
+    <string-array name="nav_drawer_items">
+        <item>Home</item>
+        <item>Past Orders</item>
+        <item> My Addresses</item>
+        <item> Order Status</item>
+        <item> My wallet</item>
+    </string-array>
+    <array name="nav_drawer_icons">
+
+    </array>
+
+
+    //this is for the String names of the stores
+    <string-array name="StoreNames">
+        <item>Macys</item>
+        <item>ZARA</item>
+        <item>Nordstrom</item>
+        <item>Express</item>
+        <item>H and M</item>
+        <item>Bloomingdales</item>
+        <item>Saks Fifth</item>
+        <item>Guess</item>
+        <item>Ralph Lauren</item>
+        <item>Target</item>
+        <item>Calvin K</item>
+        <item>Old Navy</item>
+    </string-array>
+    //this is for the store logos
+    <array name="StoreLogos">
+        <item>@drawable/macys_logo</item>
+    </array>
+
+</resources>
