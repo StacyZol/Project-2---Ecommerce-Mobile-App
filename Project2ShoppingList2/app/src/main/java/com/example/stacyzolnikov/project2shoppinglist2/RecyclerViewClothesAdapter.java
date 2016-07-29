@@ -1,7 +1,12 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.CursorAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +28,10 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
     }
 
 
-    public RecyclerViewClothesAdapter(List<Shirt> shirts, int itemLayout) {
+    public RecyclerViewClothesAdapter(List<Shirt> shirts, int itemLayout, Context context) {
         this.shirts = shirts;
         this.mItemXML = itemLayout;
+        this.mContext = context;
     }
     public RecyclerViewClothesAdapter(List<Shirt> shirts, Context context) {
         this.shirts = shirts;
@@ -37,19 +43,35 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View parentView = inflater.inflate(R.layout.custom_items_view, parent, false);
         ClothesViewHolder viewHolder = new ClothesViewHolder(parentView);
+        mContext = parent.getContext();
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ClothesViewHolder holder, int position) {
+    public void onBindViewHolder(final ClothesViewHolder holder, final int position) {
         Shirt shirt = shirts.get(position);
         holder.mShirtName.setText(shirts.get(position).getShirtName());
         holder.mPrice.setText(shirts.get(position).getPrice());
 //
-        int imageResource =mContext.getResources().getIdentifier(shirts.get(position).getHeart().replace(".png", ""), "drawable", mContext.getPackageName());
+        int imageResource = mContext.getResources().getIdentifier(shirts.get(position).getHeart().replace(".png", ""), "drawable", mContext.getPackageName());
         holder.mHeart.setImageResource(imageResource);
         int imageResource2 = mContext.getResources().getIdentifier(shirts.get(position).getShirtPhotosID().replace(".png", ""), "drawable", mContext.getPackageName());
         holder.mShirtPhotos.setImageResource(imageResource2);
+
+
+
+        holder.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = ((AppCompatActivity) mContext).getSupportFragmentManager();
+                AddToCartDialogFragment addToCart = new AddToCartDialogFragment(shirts, position);
+                addToCart.show(fm, "add_to_cart");
+
+            }
+        });
+
+
     }
 
 

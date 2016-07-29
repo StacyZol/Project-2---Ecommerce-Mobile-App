@@ -1,5 +1,6 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +65,8 @@ public class StoreActivity extends AppCompatActivity {
             case R.id.SearchStores:
                 return true;
             case R.id.ShoppingCart:
+                Intent intent = new Intent(StoreActivity.this, ShoppingCartActivity2.class);
+                startActivity(intent);
                 return true;
             case R.id.NavBar:
                 return true;

@@ -24,22 +24,29 @@ public class MainFragment extends Fragment {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private Toolbar toolbar;
-    private SectionPagerAdapter mSectionPagerAdapter;
+    public SectionPagerAdapter mSectionPagerAdapter;
     public static PlaceHolderFragment.OnListItemClickListener mItemListener;
-    private CollapsingToolbarLayout mCollapsingToolbarLayout;
+    public CollapsingToolbarLayout mCollapsingToolbarLayout;
     TextView testTestView;
 
-    public static MainFragment newInstance(PlaceHolderFragment.OnListItemClickListener listener) {
+  //  public static MainFragment newInstance(PlaceHolderFragment.OnListItemClickListener listener) {
+  //      MainFragment fragment = new MainFragment();
+  //      fragment.mItemListener = listener;
+  //      return fragment;
+  //  }
+
+//
+    public static Fragment newInstance(PlaceHolderFragment.OnListItemClickListener listener) {
         MainFragment fragment = new MainFragment();
         fragment.mItemListener = listener;
         return fragment;
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main_items, container, false);
         toolbar = (Toolbar) rootView.findViewById(R.id.items_toolbar);
+
         //Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         mViewPager = (ViewPager) rootView.findViewById(R.id.items_viewpager);
         mTabLayout = (TabLayout) rootView.findViewById(R.id.items_tabs);

@@ -1,6 +1,7 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,15 +29,20 @@ public class PlaceHolderFragment extends Fragment {
     RecyclerView mRecyclerview;
 
     public interface OnListItemClickListener {
-       // void OnListItemClicked(int tabPosition, int listPosition);
-        void onListItemClicked();
+      void OnListItemClicked(int tabPosition, int listPosition);
+       // void onListItemClicked();
+    }
+//
+  //Below is for the Dialog
+    private void showDialog() {
+
+
     }
 
-
-    public static Fragment newInstance(int tab_number, OnListItemClickListener listener) {
-        PlaceHolderFragment fragment = new PlaceHolderFragment();
-        fragment.tabPosition = tab_number;
-        fragment.mListItemClickListener = listener;
+    public static PlaceHolderFragment newInstance(int tab_number, OnListItemClickListener listener) {
+        PlaceHolderFragment placeHolderFragment = new PlaceHolderFragment();
+        placeHolderFragment.tabPosition = tab_number;
+        placeHolderFragment.mListItemClickListener = listener;
         //tabPosition = tab_number;
         //mListItemClickListener = listener;
 
@@ -45,19 +51,19 @@ public class PlaceHolderFragment extends Fragment {
 //
      //   placeHolderFragment.setArguments(bundle);
      //
-        return fragment;
+        return placeHolderFragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //View view = null;
-     //int tab_number = getArguments().getInt(TAB_NUMBER, 0);
+    // int tabPosition = getArguments().getInt(TAB_NUMBER, 0);
         View view = inflater.inflate(R.layout.fragment_lists, container, false);
         mRecyclerview = (RecyclerView) view.findViewById(R.id.ShirtsRecyclerView);
 //
 //        mContext = container.getContext();
-        mContext = getActivity().getApplicationContext();
+        mContext = getActivity();
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(mContext);
 
         //Toast.makeText(mContext, "HAHHHHHHH", Toast.LENGTH_SHORT).show();
@@ -67,9 +73,9 @@ public class PlaceHolderFragment extends Fragment {
                 RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
                 mRecyclerview.setLayoutManager(linearLayoutManager);
                 databaseHelper = DatabaseHelper.getInstance(mContext);
-                Log.d("test2", databaseHelper.getShirts().get(0).getHeart());
+                Log.d("testfragment1", databaseHelper.getShirts().get(0).getHeart());
                 Toast.makeText(mContext, "Fragment1", Toast.LENGTH_SHORT).show();
-                RecyclerViewClothesAdapter adapter = new RecyclerViewClothesAdapter(databaseHelper.getShirts(), R.layout.fragment_lists);
+                RecyclerViewClothesAdapter adapter = new RecyclerViewClothesAdapter(databaseHelper.getShirts(), R.layout.fragment_lists, mContext);
 
 
                 mRecyclerview.setAdapter(adapter);
@@ -78,9 +84,21 @@ public class PlaceHolderFragment extends Fragment {
                RecyclerView.LayoutManager linearLayoutManager1 = new LinearLayoutManager(mContext);
                mRecyclerview.setLayoutManager(linearLayoutManager1);
                DatabaseHelper databaseHelper1 = DatabaseHelper.getInstance(mContext);
-               RecyclerViewClothesAdapter adapter1 = new RecyclerViewClothesAdapter(databaseHelper1.getShirts(), R.layout.fragment_lists);
+               RecyclerViewClothesAdapter adapter1 = new RecyclerViewClothesAdapter(databaseHelper1.getShirts(), R.layout.fragment_lists, mContext);
                mRecyclerview.setAdapter(adapter1);
+               Log.d("testFragment2", databaseHelper.getShirts().get(0).getHeart());
+               Toast.makeText(mContext, "Fragment2", Toast.LENGTH_SHORT).show();
                break;
+            case 2:
+                RecyclerView.LayoutManager linearLayoutManager2 = new LinearLayoutManager(mContext);
+                mRecyclerview.setLayoutManager(linearLayoutManager2);
+                DatabaseHelper databaseHelper2 = DatabaseHelper.getInstance(mContext);
+                RecyclerViewClothesAdapter adapter2 = new RecyclerViewClothesAdapter(databaseHelper2.getShirts(), R.layout.fragment_lists, mContext);
+                mRecyclerview.setAdapter(adapter2);
+                Log.d("testfragment3", databaseHelper.getShirts().get(0).getHeart());
+                Toast.makeText(mContext, "Fragment3", Toast.LENGTH_SHORT).show();
+                break;
+
         }
 
 
@@ -91,6 +109,8 @@ public class PlaceHolderFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+
 }
 
 

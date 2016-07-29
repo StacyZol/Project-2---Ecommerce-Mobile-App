@@ -26,4 +26,9 @@ public class ClothesViewHolder extends RecyclerView.ViewHolder {
         mShirtPhotos = (ImageView) itemView.findViewById(R.id.ItemPhotosID);
         mCardView = (CardView) itemView.findViewById(R.id.CustomItemView);
     }
+
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        itemView.setOnClickListener(onClickListener);
+    }
 }

@@ -19,7 +19,7 @@
             android:layout_height="264dp"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <ImageView
                 android:id="@+id/items_header"
                 android:layout_width="match_parent"
@@ -45,16 +45,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom"
-                app:tabIndicatorColor="@android:color/white" />
+                app:tabIndicatorColor="@android:color/white"
 
+                app:tabMode="scrollable"
+                />
         </android.support.design.widget.CollapsingToolbarLayout>
+
+
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="fill_vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+
+
+
 
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
@@ -66,6 +71,6 @@
 
         </android.support.v4.view.ViewPager>
 
-    </android.support.v4.widget.NestedScrollView>
+
 
 </android.support.design.widget.CoordinatorLayout>
