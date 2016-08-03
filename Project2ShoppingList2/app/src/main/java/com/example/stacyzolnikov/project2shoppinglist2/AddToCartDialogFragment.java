@@ -3,6 +3,7 @@ package com.example.stacyzolnikov.project2shoppinglist2;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -82,6 +83,15 @@ public class AddToCartDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 shoppingCartSingleton.addCartObject(new CartObject(shirts.get(position).getShirtName(), shirts.get(position).getPrice(), shirts.get(position).getShirtPhotosID()));
 //                shoppingCartSingleton.addCartObject(new CartObject("Testabcd", "123", "blah"));
+                getDialog().dismiss();
+            }
+        });
+
+        mButton2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                getDialog().dismiss();
             }
         });
 

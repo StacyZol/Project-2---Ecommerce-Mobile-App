@@ -74,7 +74,7 @@ public class PlaceHolderFragment extends Fragment {
                 mRecyclerview.setLayoutManager(linearLayoutManager);
                 databaseHelper = DatabaseHelper.getInstance(mContext);
                 Log.d("testfragment1", databaseHelper.getShirts().get(0).getHeart());
-                Toast.makeText(mContext, "Fragment1", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(mContext, "Fragment1", Toast.LENGTH_SHORT).show();
                 RecyclerViewClothesAdapter adapter = new RecyclerViewClothesAdapter(databaseHelper.getShirts(), R.layout.fragment_lists, mContext);
 
 
@@ -87,7 +87,7 @@ public class PlaceHolderFragment extends Fragment {
                RecyclerViewClothesAdapter adapter1 = new RecyclerViewClothesAdapter(databaseHelper1.getShirts(), R.layout.fragment_lists, mContext);
                mRecyclerview.setAdapter(adapter1);
                Log.d("testFragment2", databaseHelper.getShirts().get(0).getHeart());
-               Toast.makeText(mContext, "Fragment2", Toast.LENGTH_SHORT).show();
+             //  Toast.makeText(mContext, "Fragment2", Toast.LENGTH_SHORT).show();
                break;
             case 2:
                 RecyclerView.LayoutManager linearLayoutManager2 = new LinearLayoutManager(mContext);
@@ -96,7 +96,7 @@ public class PlaceHolderFragment extends Fragment {
                 RecyclerViewClothesAdapter adapter2 = new RecyclerViewClothesAdapter(databaseHelper2.getShirts(), R.layout.fragment_lists, mContext);
                 mRecyclerview.setAdapter(adapter2);
                 Log.d("testfragment3", databaseHelper.getShirts().get(0).getHeart());
-                Toast.makeText(mContext, "Fragment3", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(mContext, "Fragment3", Toast.LENGTH_SHORT).show();
                 break;
 
         }

@@ -2,7 +2,9 @@ package com.example.stacyzolnikov.project2shoppinglist2;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -12,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,6 +29,9 @@ public class StoreActivity extends AppCompatActivity {
     RecyclerView mRecyclerViewStore;
     List<Store> arrayList;
     DatabaseHelper databaseHelper;
+    ProgressBar mProgressBar;
+    TextView mTextView;
+    AsyncTask<Integer, Integer, Cursor> task;
 
 
     @Override
@@ -45,6 +52,10 @@ public class StoreActivity extends AppCompatActivity {
         databaseHelper = DatabaseHelper.getInstance(StoreActivity.this);
         databaseHelper.addToDatabase();
         arrayList = databaseHelper.getStores();
+
+        //For progress bar and text view
+        mProgressBar = (ProgressBar) findViewById(R.id.StoreProgressBar);
+        mTextView = (TextView) findViewById(R.id.NumberOfStoresText);
 
 
         RecyclerViewStoreAdapter adapter = new RecyclerViewStoreAdapter(arrayList,this);

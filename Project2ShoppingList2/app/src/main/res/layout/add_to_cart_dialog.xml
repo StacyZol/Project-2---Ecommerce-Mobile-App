@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-android:layout_margin="10dp"
-        android:padding="4dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+
         >
         <ImageView
             android:layout_width="100dp"
@@ -22,6 +22,7 @@ android:layout_margin="10dp"
             android:layout_alignTop="@+id/ItemPhotosID"
             android:textColor="#000000"
             android:textSize="20dp"
+            android:background="#FFFFFF"
             android:id="@+id/AddToCart"
             android:layout_toRightOf="@+id/ItemPhotosID"
             />
@@ -31,6 +32,7 @@ android:layout_margin="10dp"
             android:textColor="#000000"
             android:text="Nevermind"
             android:textSize="20dp"
+            android:background="#FFFFFF"
             android:id="@+id/NevermindID"
             android:layout_below="@+id/AddToCart"
             android:layout_toRightOf="@+id/ItemPhotosID"

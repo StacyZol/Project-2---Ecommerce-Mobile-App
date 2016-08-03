@@ -216,8 +216,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void addToShirts () {
         SQLiteDatabase db = getWritableDatabase();
-        Shirt shirt = new Shirt ( "Tie Neck Tunic" , "four_stars", "$6.00", "four_stars", "Macys");
-        Shirt shirt1 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "ZARA");
+        Shirt shirt = new Shirt ( "Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Macys");
+        Shirt shirt1 = new Shirt ("Off Shoulder Shirt" , "@drawableheart", "$6.00", "@drawablephoto", "ZARA");
         Shirt shirt2 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "ZARA");
         Shirt shirt3 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Macys");
         Shirt shirt4 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "ZARA");
