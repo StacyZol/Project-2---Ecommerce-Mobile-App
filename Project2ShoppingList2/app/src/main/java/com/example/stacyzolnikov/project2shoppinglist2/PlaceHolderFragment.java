@@ -3,6 +3,7 @@ package com.example.stacyzolnikov.project2shoppinglist2;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -27,6 +30,18 @@ public class PlaceHolderFragment extends Fragment {
     private int tabPosition;
     private final String TAB_NUMBER = "default_value";
     RecyclerView mRecyclerview;
+    AsyncTask<Void, Void, List> task;
+    ProgressBar mProgressBar2;
+    TextView mTextView2;
+
+
+    public PlaceHolderFragment() {}
+
+    public PlaceHolderFragment(Context mContext) {
+        this.mContext = mContext;
+    }
+
+
 
     public interface OnListItemClickListener {
       void OnListItemClicked(int tabPosition, int listPosition);
@@ -61,24 +76,59 @@ public class PlaceHolderFragment extends Fragment {
     // int tabPosition = getArguments().getInt(TAB_NUMBER, 0);
         View view = inflater.inflate(R.layout.fragment_lists, container, false);
         mRecyclerview = (RecyclerView) view.findViewById(R.id.ShirtsRecyclerView);
-//
+
+
 //        mContext = container.getContext();
         mContext = getActivity();
-        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(mContext);
+        final DatabaseHelper[] databaseHelper = {DatabaseHelper.getInstance(mContext)};
+        //For progress bar and text view
+
 
         //Toast.makeText(mContext, "HAHHHHHHH", Toast.LENGTH_SHORT).show();
+
+
+        mProgressBar2 = (ProgressBar) view.findViewById(R.id.StoreProgressBar);
+        mTextView2 = (TextView)  view.findViewById(R.id.NumberOfShirtsText);
 
         switch (tabPosition) {
             case 0:
                 RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
                 mRecyclerview.setLayoutManager(linearLayoutManager);
-                databaseHelper = DatabaseHelper.getInstance(mContext);
-                Log.d("testfragment1", databaseHelper.getShirts().get(0).getHeart());
-              //  Toast.makeText(mContext, "Fragment1", Toast.LENGTH_SHORT).show();
-                RecyclerViewClothesAdapter adapter = new RecyclerViewClothesAdapter(databaseHelper.getShirts(), R.layout.fragment_lists, mContext);
+               // databaseHelper = DatabaseHelper.getInstance(mContext);
+                Log.d("testfragment1", databaseHelper[0].getShirts().get(0).getHeart());
 
+              //  Toast.makeText(mContext, "Fragment1", Toast.LENGTH_SHORT).show();
+             //  RecyclerViewClothesAdapter adapter = new RecyclerViewClothesAdapter(databaseHelper.getShirts(), R.layout.fragment_lists, mContext);
+
+                databaseHelper[0] = DatabaseHelper.getInstance(mContext);
+                RecyclerViewClothesAdapter adapter = new RecyclerViewClothesAdapter(databaseHelper[0].getShirts(), R.layout.fragment_lists, mContext);
 
                 mRecyclerview.setAdapter(adapter);
+
+                task = new AsyncTask<Void, Void, List>() {
+                    @Override
+                    protected List doInBackground(Void... voids) {
+                       return databaseHelper[0].getShirts();
+                      //  publishProgress();
+                    }
+
+                    @Override
+                    protected void onProgressUpdate(Void... values) {
+                        super.onProgressUpdate(values);
+                        mTextView2.setText("Uploading Shirts " + values[0]);
+                    }
+
+                    @Override
+                    protected void onPostExecute(List list) {
+                        super.onPostExecute(list);
+                        int count = DatabaseHelper.getInstance(getContext()).getShirts().size();
+                       // mProgressBar2.setVisibility(View.INVISIBLE);
+                        mTextView2.setText("Shirts found: " +count);
+
+                    }
+                };
+                task.execute();
+
                 break;
            case 1:
                RecyclerView.LayoutManager linearLayoutManager1 = new LinearLayoutManager(mContext);
@@ -86,7 +136,7 @@ public class PlaceHolderFragment extends Fragment {
                DatabaseHelper databaseHelper1 = DatabaseHelper.getInstance(mContext);
                RecyclerViewClothesAdapter adapter1 = new RecyclerViewClothesAdapter(databaseHelper1.getShirts(), R.layout.fragment_lists, mContext);
                mRecyclerview.setAdapter(adapter1);
-               Log.d("testFragment2", databaseHelper.getShirts().get(0).getHeart());
+               Log.d("testFragment2", databaseHelper[0].getShirts().get(0).getHeart());
              //  Toast.makeText(mContext, "Fragment2", Toast.LENGTH_SHORT).show();
                break;
             case 2:
@@ -95,7 +145,7 @@ public class PlaceHolderFragment extends Fragment {
                 DatabaseHelper databaseHelper2 = DatabaseHelper.getInstance(mContext);
                 RecyclerViewClothesAdapter adapter2 = new RecyclerViewClothesAdapter(databaseHelper2.getShirts(), R.layout.fragment_lists, mContext);
                 mRecyclerview.setAdapter(adapter2);
-                Log.d("testfragment3", databaseHelper.getShirts().get(0).getHeart());
+                Log.d("testfragment3", databaseHelper[0].getShirts().get(0).getHeart());
                // Toast.makeText(mContext, "Fragment3", Toast.LENGTH_SHORT).show();
                 break;
 
@@ -104,6 +154,7 @@ public class PlaceHolderFragment extends Fragment {
 
         return view;
     }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

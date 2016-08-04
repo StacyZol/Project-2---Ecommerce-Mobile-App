@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="20dp"
+    android:layout_height="match_parent"
+
 
         >
         <ImageView
@@ -20,19 +20,19 @@
             android:text="Add To Cart"
             android:layout_marginBottom="10dp"
             android:layout_alignTop="@+id/ItemPhotosID"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:textSize="20dp"
-            android:background="#FFFFFF"
+            android:background="@drawable/shape"
             android:id="@+id/AddToCart"
             android:layout_toRightOf="@+id/ItemPhotosID"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
             android:text="Nevermind"
             android:textSize="20dp"
-            android:background="#FFFFFF"
+            android:background="@drawable/shape"
             android:id="@+id/NevermindID"
             android:layout_below="@+id/AddToCart"
             android:layout_toRightOf="@+id/ItemPhotosID"

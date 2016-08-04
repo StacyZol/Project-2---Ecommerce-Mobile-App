@@ -5,7 +5,7 @@ package com.example.stacyzolnikov.project2shoppinglist2;
  */
 public class Store {
     private int id;
-    private String storeName;
+     String storeName;
     private String stars;
     private String reviews;
     private String photosID;

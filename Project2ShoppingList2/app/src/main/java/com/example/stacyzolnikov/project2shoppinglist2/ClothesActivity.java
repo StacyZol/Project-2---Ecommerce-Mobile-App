@@ -1,5 +1,6 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ public class ClothesActivity extends AppCompatActivity implements  PlaceHolderFr
             case R.id.SearchStores:
                 return true;
             case R.id.ShoppingCart:
+                Intent intent = new Intent(ClothesActivity.this, ShoppingCartActivity2.class);
+                startActivity(intent);
                 return true;
             case R.id.NavBar:
                 return true;

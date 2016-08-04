@@ -29,7 +29,9 @@ public class StoreViewHolder extends RecyclerView.ViewHolder{
         mCardView = (CardView) itemView.findViewById(R.id.CustomStoreView);
     }
 
-
+    public void bind (Store store) {
+        mStoreName.setText(store.getStoreName());
+    }
 
     //Below is to set on the card item listener
     //Still need to create the function

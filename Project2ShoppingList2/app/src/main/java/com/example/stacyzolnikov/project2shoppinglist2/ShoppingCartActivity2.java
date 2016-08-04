@@ -4,12 +4,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class ShoppingCartActivity2 extends AppCompatActivity {
+public class  ShoppingCartActivity2 extends AppCompatActivity {
     RecyclerView mRecyclerViewCart;
+    Button mButtonDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,14 @@ public class ShoppingCartActivity2 extends AppCompatActivity {
         RecyclerViewCartAdapter adapter = new RecyclerViewCartAdapter(singleton.getCartObjectList1());
         mRecyclerViewCart.setAdapter(adapter);
         //new adapter to singleton.getCartObjectList1()
+
+        mButtonDelete = (Button) findViewById(R.id.DeleteAllButton);
+        mButtonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mRecyclerViewCart.removeAllViewsInLayout();
+            }
+        });
 
 
         //set listview.adapter

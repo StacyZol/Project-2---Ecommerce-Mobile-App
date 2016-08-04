@@ -161,6 +161,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stores;
     }
 
+    //Below is to search Stores
+    public Cursor searchStoreList(String query) {
+        SQLiteDatabase db = getReadableDatabase();
+        //String query = "SELECT " + COL_ID +"," + COL_STORE_NAME + " FROM " + STORE_TABLE_NAME + " WHERE " + COL_STORE_NAME +  " LIKE ?" + "%";
+
+        Cursor cursor = db.query(STORE_TABLE_NAME, STORE_COLUMNS, COL_STORE_NAME+ " LIKE ?", new String[]{query+"%"}, null, null, null);
+      //  Cursor cursor = db.query();
+        return cursor;
+    }
+
+
     public List<Shirt> getShirts() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM SHIRT_LIST", null);

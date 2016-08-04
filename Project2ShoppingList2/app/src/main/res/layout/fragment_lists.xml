@@ -7,16 +7,22 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/testTextView"
-        android:textSize="24sp"
-        android:text="Hello"/>
+        android:id="@+id/NumberOfShirtsText"
+        android:textSize="24dp"
+        android:text=""
+        android:textColor="#000"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:id="@+id/ShirtsRecyclerView"
         />
-
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ShirtProgressBar"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
 
 
 </LinearLayout>

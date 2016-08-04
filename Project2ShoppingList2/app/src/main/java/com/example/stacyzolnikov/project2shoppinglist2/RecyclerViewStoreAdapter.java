@@ -1,25 +1,33 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filterable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by stacyzolnikov on 7/20/16.
  */
 public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHolder> {
-    List<Store> stores;
+    List<Store> stores, filterList;
     Context context;
+     LayoutInflater mInflater;
 
 
     public RecyclerViewStoreAdapter(List<Store> stores, Context context) {
         this.stores = stores;
         this.context = context;
+        this.filterList = new ArrayList<Store>();
+        this.filterList.addAll(this.stores);
+        mInflater = LayoutInflater.from(context);
     }
 
     public RecyclerViewStoreAdapter() {
@@ -36,6 +44,7 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
 
     @Override
     public void onBindViewHolder(StoreViewHolder holder, final int position) {
+        Store store = filterList.get(position);
         holder.mStoreName.setText(stores.get(position).getStoreName());
         holder.mReviews.setText(stores.get(position).getReviews());
         int imageResource2 = context.getResources().getIdentifier(stores.get(position).getStars().replace(".png", ""), "drawable", context.getPackageName());
@@ -45,6 +54,13 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
 
         // holder.mReviews.setOnClickListener
         //Above will pull up an AlertDialog for reviews
+
+        //This is for search
+
+
+        final Store storeNew = stores.get(position);
+        holder.bind(storeNew);
+
 
         holder.setOnClickListener(new View.OnClickListener() {
 
@@ -68,4 +84,86 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
             return stores.size();
         }
     }
+    public void filter(final String text) {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                filterList.clear();
+                if(TextUtils.isEmpty(text)){
+                    filterList.addAll(stores);
+            }
+                else {
+                    for(Store stores2: stores){
+                        if(stores2.storeName.toLowerCase().contains(text.toLowerCase())){
+                            filterList.add(stores2);
+                        }
+
+                    }
+                }
+                ((Activity)context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void setStore (List<Store> storesNew) {
+        stores = new ArrayList<>(storesNew);
+    }
+
+    public Store removeItem(int position) {
+        Store store = stores.remove(position);
+        notifyItemRemoved(position);
+        return store;
+    }
+
+    public void addStore (int position, Store storeNew) {
+        stores.add(position, storeNew);
+        notifyItemInserted(position);
+    }
+
+    public void moveItem (int fromPosition, int toPosition) {
+        final Store storeNew = stores.remove(fromPosition);
+        stores.add(toPosition, storeNew);
+        notifyItemMoved(fromPosition, toPosition);
+
+    }
+
+    public void animateTo(List<Store> storeNew) {
+        applyAndAnimateRemovals(storeNew);
+        applyAndAnimateAdditions(storeNew);
+        applyAndAnimateMovedItems(storeNew);
+    }
+
+    private void applyAndAnimateRemovals(List<Store> newStores) {
+        for (int i = stores.size() - 1; i>=0; i--){
+            Store store = stores.get(i);
+            if(!newStores.contains(store)){
+                removeItem(i);
+            }
+        }
+    }
+    private void applyAndAnimateAdditions (List<Store> newStores) {
+        for (int i = 0, count = newStores.size(); i<count; i++){
+            Store store = stores.get(i);
+            if(!stores.contains(store)) {
+                addStore(i, store);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems (List<Store> newStores) {
+        for (int toPosition = newStores.size() - 1; toPosition >=0; toPosition--){
+            Store store = newStores.get(toPosition);
+            final int fromPosition = stores.indexOf(store);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
+    }
+
 }

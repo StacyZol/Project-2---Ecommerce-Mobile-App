@@ -11,21 +11,33 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StoreActivity" />
+        <activity android:name=".StoreActivity">
+            <meta-data android:name="android.app.default_searchable"
+                android:value=".SearchActivity"/>
+        </activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <!--<meta-data-->
+            <!--android:name="android.app.searchable"-->
+            <!--android:resource="@xml/searchable" />-->
 
         <activity android:name=".ClothesActivity" />
-        <activity android:name=".ShoppingCartActivity2"></activity>
+        <activity android:name=".ShoppingCartActivity2" />
+
+        <activity android:name=".SearchActivity">
+            <intent-filter>
+                <category android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+
+        </activity>
     </application>
 
 </manifest>
