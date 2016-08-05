@@ -2,6 +2,7 @@ package com.example.stacyzolnikov.project2shoppinglist2;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -43,5 +44,7 @@ public class StoreManager {
 
     public void updateSearch (String search) {
         stores = DatabaseHelper.getInstance(context).searchStoreList(search);
+        Toast.makeText(context, "Test", Toast.LENGTH_LONG).show();
+
     }
 }

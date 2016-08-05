@@ -136,9 +136,9 @@ public class StoreActivity extends AppCompatActivity {
             private void handleIntent(Intent intent) {
                 if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
                     String query = getIntent().getStringExtra(SearchManager.QUERY);
-                    //StoreManager.getInstance(StoreActivity.this).updateSearch(query);
+                    StoreManager.getInstance(StoreActivity.this).updateSearch(query);
                     arrayList.clear();
-                    arrayList.addAll(DatabaseHelper.getInstance(StoreActivity.this).searchStoreList(query));
+                   arrayList.addAll(DatabaseHelper.getInstance(StoreActivity.this).searchStoreList(query));
                     mAdapter.notifyDataSetChanged();
                   //  List<Store> stores = DatabaseHelper.getInstance(StoreActivity.this).searchStoreList(query);
                 }
@@ -151,9 +151,16 @@ public class StoreActivity extends AppCompatActivity {
 
                 //Searchable configuration
                 SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        MenuItem item = (MenuItem) menu.findItem(R.id.SearchStores).getActionView();
+
+        //       MenuItem searchItem =   menu.findItem(R.id.SearchStoresOptions);
+              // MenuItem item = (MenuItem) menu.findItem(R.id.SearchStoresOptions).getActionView(item);
+               // SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+
                 SearchView searchView = (SearchView) menu.findItem(R.id.SearchStoresOptions).getActionView();
+
                // ComponentName componentName = new ComponentName(this, SearchActivity.class);
+
                 ComponentName componentName = getComponentName();
                 SearchableInfo searchableInfo = searchManager.getSearchableInfo(componentName);
                 searchView.setSearchableInfo(searchableInfo);
@@ -162,10 +169,23 @@ public class StoreActivity extends AppCompatActivity {
 //        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 //        searchView.setOnQueryTextListener(this);
 
-//        return super.onCreateOptionsMenu(menu);
-                return true;
+       return super.onCreateOptionsMenu(menu);
+               // return true;
             }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.SearchStores:
+                return true;
+            case R.id.ShoppingCart:
+                Intent intent = new Intent(StoreActivity.this, ShoppingCartActivity2.class);
+                startActivity(intent);
+                return true;
+            case R.id.NavBar:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
             //Below is to add actions to items in the menu
 
 
