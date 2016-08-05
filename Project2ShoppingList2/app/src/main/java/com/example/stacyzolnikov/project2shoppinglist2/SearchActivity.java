@@ -14,9 +14,9 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        if (Intent.ACTION_SEARCH.equals((getIntent().getAction()))){
+        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())){
             String query = getIntent().getStringExtra(SearchManager.QUERY);
-            Cursor cursor = DatabaseHelper.getInstance(this).searchStoreList(query);
+            Cursor cursor = (Cursor) DatabaseHelper.getInstance(this).searchStoreList(query);
             Toast.makeText(SearchActivity.this, "Test "+cursor.getCount(), Toast.LENGTH_SHORT).show();
         }
 

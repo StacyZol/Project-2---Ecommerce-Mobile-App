@@ -26,6 +26,9 @@ public class Store {
         this.stars = stars;
     }
 
+
+
+
     public String getStoreName() {
         return storeName;
     }

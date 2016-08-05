@@ -1,6 +1,7 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
 import android.app.SearchManager;
+import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StoreActivity extends AppCompatActivity{
+public class StoreActivity extends AppCompatActivity {
+    private static final String TAG = "StoreActivity";
+
     RecyclerView mRecyclerViewStore;
     List<Store> arrayList;
     DatabaseHelper databaseHelper;
@@ -49,6 +53,7 @@ public class StoreActivity extends AppCompatActivity{
     RecyclerViewStoreAdapter mAdapter;
     CursorAdapter mCursorAdapter;
     SearchView mSearchView;
+    Toolbar mToolbar;
 
 
     @Override
@@ -58,8 +63,8 @@ public class StoreActivity extends AppCompatActivity{
         CardView cardview = (CardView) findViewById(R.id.CustomStoreView);
 
         //This is to add the ToolBar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         //This is for the RecyclerView for the stores
         mRecyclerViewStore = (RecyclerView) findViewById(R.id.StoresRecyclerView);
@@ -72,164 +77,106 @@ public class StoreActivity extends AppCompatActivity{
 
         //For progress bar and text view and search
         mProgressBar = (ProgressBar) findViewById(R.id.StoreProgressBar);
+        mProgressBar.setVisibility(View.VISIBLE);
+
         mTextView = (TextView) findViewById(R.id.NumberOfStoresText);
-        mSearchView = (SearchView) findViewById(R.id.SearchStores);
+        mSearchView = (SearchView) findViewById(R.id.SearchStoresOptions);
 
-        final RecyclerViewStoreAdapter adapter = new RecyclerViewStoreAdapter(arrayList, this);
-        mRecyclerViewStore.setAdapter(adapter);
-        setupSearchView();
-        addStoreItems();
-    }
+        mAdapter = new RecyclerViewStoreAdapter(arrayList, this);
+        mRecyclerViewStore.setAdapter(mAdapter);
+        //setupSearchView();
 
-
-
-
-        //Below is for the search functionality
-
-       // RecyclerViewStoreAdapter searchAdapter = new RecyclerViewStoreAdapter(arrayList, this);
-       // mRecyclerViewStore.setAdapter(searchAdapter);
-
-        //   if (Intent.ACTION_SEARCH.equals(getIntent().getAction())){
-        //       String query = getIntent().getStringExtra(SearchManager.QUERY);
-        //        Cursor cursor = DatabaseHelper.getInstance(StoreActivity.this).searchStoreList(query);
-        //       CursorAdapter searchAdapter = new CursorAdapter(this, cursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER){
-
-
-
-          //     @Override
-          //     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-          //         return LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false);
-          //        // RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(StoreActivity.this);
-          //        // mRecyclerViewStore.setLayoutManager(linearLayoutManager);
-          //        // return LayoutInflater.from(context).inflate(R.layout.activity_store, parent, false);
-//
-          //     }
-////
-          //     @Override
-          //     public void bindView(View view, Context context, Cursor cursor) {
-          //         CardView cardView = (CardView) view.findViewById(R.id.CustomStoreView);
-          //         TextView textView = (TextView) view.findViewById(android.R.id.text1);
-          //         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.StoresRecyclerView);
-          //         int store = cursor.getColumnIndex(DatabaseHelper.COL_STORE_NAME);
-////
-          //         textView.setText(cursor.getString(store));
-//
-
-//
-              //  }
-         //  };
-
-        //       listView.setAdapter(searchAdapter);
-      //  }
-//
-
-  //  }
-
-
-
-    //Below isn't working
-    public void addStoreItems() {
-        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
-            Toast.makeText(this, "Test", Toast.LENGTH_LONG).show();
-        } else {
-            task = new AsyncTask<Void, Void, List>() {
-
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    mProgressBar.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                protected List doInBackground(Void... voids) {
-                    return databaseHelper.getStores();
-                }
-
-
-                @Override
-                protected void onProgressUpdate(Void... values) {
-                    super.onProgressUpdate(values);
-                    mTextView.setText("Searching Stores " + values[0]);
-                }
-
-                @Override
-                protected void onPostExecute(List list) {
-                    super.onPostExecute(list);
-                    int count = DatabaseHelper.getInstance(StoreActivity.this).getShirts().size();
-                    mTextView.setText("Stores found: " + count);
-                }
-            };
-            task.execute();
-
-
-        }
+        handleIntent(getIntent());
 
     }
 
 
-    //Below is to inflate the tool bar menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
 
 
-        //Searchable configuration
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//      Adapter searchAdapter = new CursorAdapter(this, cursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
+
+
+            //     @Override
+            //     public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            //         return LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false);
+            //        // RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(StoreActivity.this);
+            //        // mRecyclerViewStore.setLayoutManager(linearLayoutManager);
+            //        // return LayoutInflater.from(context).inflate(R.layout.activity_store, parent, false);
+//
+            //     }
+////
+            //     @Override
+            //     public void bindView(View view, Context context, Cursor cursor) {
+            //         CardView cardView = (CardView) view.findViewById(R.id.CustomStoreView);
+            //         TextView textView = (TextView) view.findViewById(android.R.id.text1);
+            //         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.StoresRecyclerView);
+            //         int store = cursor.getColumnIndex(DatabaseHelper.COL_STORE_NAME);
+////
+            //         textView.setText(cursor.getString(store));
+//
+
+//
+            //  }
+            //  };
+
+            //       listView.setAdapter(searchAdapter);
+            //  }
+//
+
+            //  }
+
+
+            @Override
+            protected void onNewIntent(Intent intent) {
+                Log.d(TAG, "onNewIntent: ");
+                setIntent(intent);
+                handleIntent(intent);
+            }
+
+            private void handleIntent(Intent intent) {
+                if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+                    String query = getIntent().getStringExtra(SearchManager.QUERY);
+                    //StoreManager.getInstance(StoreActivity.this).updateSearch(query);
+                    arrayList.clear();
+                    arrayList.addAll(DatabaseHelper.getInstance(StoreActivity.this).searchStoreList(query));
+                    mAdapter.notifyDataSetChanged();
+                  //  List<Store> stores = DatabaseHelper.getInstance(StoreActivity.this).searchStoreList(query);
+                }
+            }
+            //Below is to inflate the tool bar menu
+            @Override
+            public boolean onCreateOptionsMenu(Menu menu) {
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.main_menu, menu);
+
+                //Searchable configuration
+                SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 //        MenuItem item = (MenuItem) menu.findItem(R.id.SearchStores).getActionView();
-        SearchView searchView = (SearchView) menu.findItem(R.id.SearchStoresOptions).getActionView();
-        ComponentName componentName = new ComponentName(this, SearchActivity.class);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+                SearchView searchView = (SearchView) menu.findItem(R.id.SearchStoresOptions).getActionView();
+               // ComponentName componentName = new ComponentName(this, SearchActivity.class);
+                ComponentName componentName = getComponentName();
+                SearchableInfo searchableInfo = searchManager.getSearchableInfo(componentName);
+                searchView.setSearchableInfo(searchableInfo);
 
 //        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 //        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 //        searchView.setOnQueryTextListener(this);
 
 //        return super.onCreateOptionsMenu(menu);
-        return true;
-    }
-
-    //Below is to add actions to items in the menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.SearchStores:
-              // SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-              // SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-              // searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-               // searchView.setOnQueryTextListener(this);
                 return true;
-            case R.id.ShoppingCart:
-                Intent intent = new Intent(StoreActivity.this, ShoppingCartActivity2.class);
-                startActivity(intent);
-                return true;
-            case R.id.NavBar:
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+            }
 
- //   @Override
-//  protected void onNewIntent(Intent intent) {
-//      handleIntent(intent);
-//  }
+            //Below is to add actions to items in the menu
 
-//  public void handleIntent(Intent intent) {
-//      if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-//          String query = intent.getStringExtra(SearchManager.QUERY);
-//          Cursor cursor = DatabaseHelper.getInstance(this).searchStoreList(query);
-//         mCursorAdapter.changeCursor(cursor);
-//          mCursorAdapter.notifyDataSetChanged();
 
-//      }
-//  }
-    private void setupSearchView() {
+            //  private void setupSearchView() {
 //        mSearchView = (SearchView) findViewById(R.id.SearchStores);
 //
 //        // mSearchView.setIconifiedByDefault(false);
 //        mSearchView.setOnQueryTextListener(this);
 //        mSearchView.setSubmitButtonEnabled(true);
 //        mSearchView.setQueryHint("search for stores");
-    }
+        }
 //    @Override
 //    public boolean onQueryTextSubmit(String query) {
 //        return false;
@@ -260,6 +207,8 @@ public class StoreActivity extends AppCompatActivity{
 //        }
 //        return filteredStoreList;
 //    }
-}
+
+
+
 
 

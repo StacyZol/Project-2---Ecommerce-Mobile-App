@@ -53,7 +53,7 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
         holder.mPhotos.setImageResource(imageResource);
 
         // holder.mReviews.setOnClickListener
-        //Above will pull up an AlertDialog for reviews
+
 
         //This is for search
 

@@ -75,6 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL(SQL_DELETE_ENTRIES_STORE);
         db.execSQL(SQL_DELETE_ENTRIES_SHIRT);
+        onCreate(db);
     }
 
 
@@ -143,7 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Store> getStores () {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM STORE_LIST", null);
-        List<Store> stores = new ArrayList<Store>();
+        List<Store> stores = new ArrayList<>();
         String[] value={"Shirts"};
         if (cursor.moveToFirst()){
             while(!cursor.isAfterLast()){
@@ -162,20 +163,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Below is to search Stores
-    public Cursor searchStoreList(String query) {
+    public ArrayList<Store> searchStoreList(String search) {
         SQLiteDatabase db = getReadableDatabase();
+
+        ArrayList<Store> stores = new ArrayList<>();
+
+        String query= "SELECT * FROM " + STORE_TABLE_NAME + " WHERE " + COL_STORE_NAME + " LIKE '" + search + "%'";
+
         //String query = "SELECT " + COL_ID +"," + COL_STORE_NAME + " FROM " + STORE_TABLE_NAME + " WHERE " + COL_STORE_NAME +  " LIKE ?" + "%";
 
-        Cursor cursor = db.query(STORE_TABLE_NAME, STORE_COLUMNS, COL_STORE_NAME+ " LIKE ?", new String[]{query+"%"}, null, null, null);
-      //  Cursor cursor = db.query();
-        return cursor;
+
+      Cursor cursor = db.rawQuery(query,null);
+      if(cursor.moveToFirst()){
+          while(!cursor.isAfterLast()){
+              int id = cursor.getInt(cursor.getColumnIndex(COL_ID));
+              String storeName = cursor.getString(cursor.getColumnIndex(COL_STORE_NAME));
+              String stars = cursor.getString(cursor.getColumnIndex(COL_STARS));
+              String reviews = cursor.getString(cursor.getColumnIndex(COL_NUM_OF_REVIEWS));
+              String photosID = cursor.getString(cursor.getColumnIndex(COL_STORE_LOGO));
+              stores.add(new Store(id, storeName, stars, reviews, photosID));
+              cursor.moveToNext();
+          }
+      }
+        cursor.close();
+        db.close();
+        return stores;
     }
 
 
     public List<Shirt> getShirts() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM SHIRT_LIST", null);
-        List<Shirt> shirts = new ArrayList<Shirt>();
+        List<Shirt> shirts = new ArrayList<>();
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 int id = cursor.getInt(cursor.getColumnIndex(COL_ID_TOP));
