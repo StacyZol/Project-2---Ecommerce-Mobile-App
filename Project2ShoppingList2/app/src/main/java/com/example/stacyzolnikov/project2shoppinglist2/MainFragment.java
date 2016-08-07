@@ -1,5 +1,6 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -28,6 +30,7 @@ public class MainFragment extends Fragment {
     public static PlaceHolderFragment.OnListItemClickListener mItemListener;
     public CollapsingToolbarLayout mCollapsingToolbarLayout;
     TextView testTestView;
+    public ImageView mItemHeader;
 
   //  public static MainFragment newInstance(PlaceHolderFragment.OnListItemClickListener listener) {
   //      MainFragment fragment = new MainFragment();
@@ -51,7 +54,12 @@ public class MainFragment extends Fragment {
         mViewPager = (ViewPager) rootView.findViewById(R.id.items_viewpager);
         mTabLayout = (TabLayout) rootView.findViewById(R.id.items_tabs);
 //        testTestView = (TextView) rootView.findViewById(R.id.testTextView);
+       // mItemHeader = (ImageView) rootView.findViewById(R.id.items_header);
+      //  int imageResource = this.getResources().getIdentifier(DatabaseHelper.getInstance().stores.)
+       // mItemHeader.setImageResource();
 
+
+      //  holder.mShirtPhotos.setImageResource(imageResource2);
        // testTestView.setText("Hey, this works!");
 
        mCollapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.clothes_collapse_toolbar);

@@ -58,7 +58,8 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
         int imageResource2 = mContext.getResources().getIdentifier(shirts.get(position).getShirtPhotosID().replace(".png", ""), "drawable", mContext.getPackageName());
         holder.mShirtPhotos.setImageResource(imageResource2);
 
-
+ //       int imageResource3 = mContext.getResources().getIdentifier(shirts.get(position).getStorePhoto().replace(".png", ""),"drawable", mContext.getPackageName());
+ //       holder.mItemHeader.setImageResource(imageResource3);
 
         holder.setOnClickListener(new View.OnClickListener() {
 

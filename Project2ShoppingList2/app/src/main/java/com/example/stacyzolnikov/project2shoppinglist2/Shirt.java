@@ -11,6 +11,7 @@ public class Shirt {
     private String moreColors;
     private String shirtPhotosID;
     private String storeNameShirt;
+    private String storePhoto;
 
     public Shirt (int id, String shirtName, String heart, String price, String shirtPhotosID, String storeNameShirt){
         this.id = id;
@@ -19,6 +20,7 @@ public class Shirt {
         this.heart = heart;
         this.price = price;
         this.storeNameShirt = storeNameShirt;
+
     }
     public Shirt (String shirtName, String heart, String price, String shirtPhotosID, String storeNameShirt){
         this.shirtName = shirtName;
@@ -26,6 +28,7 @@ public class Shirt {
         this.heart = heart;
         this.price = price;
         this.storeNameShirt = storeNameShirt;
+
     }
 
     public int getId() {
@@ -82,5 +85,13 @@ public class Shirt {
 
     public void setStoreNameShirt(String storeNameShirt) {
         this.storeNameShirt = storeNameShirt;
+    }
+
+    public String getStorePhoto() {
+        return storePhoto;
+    }
+
+    public void setStorePhoto(String storePhoto) {
+        this.storePhoto = storePhoto;
     }
 }

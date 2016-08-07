@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StoreActivity extends AppCompatActivity {
+public class StoreActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final String TAG = "StoreActivity";
 
     RecyclerView mRecyclerViewStore;
@@ -54,6 +54,8 @@ public class StoreActivity extends AppCompatActivity {
     CursorAdapter mCursorAdapter;
     SearchView mSearchView;
     Toolbar mToolbar;
+    String[] filteredList;
+    List<Store> mStores;
 
 
     @Override
@@ -61,9 +63,12 @@ public class StoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
         CardView cardview = (CardView) findViewById(R.id.CustomStoreView);
-
-        //This is to add the ToolBar
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        filteredList = DatabaseHelper.STORE_COLUMNS;
+        final String[] STORES = new String[]{
+                "Macy's", "ZARA"
+        };
+        mStores = new ArrayList<>();
+        final Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         //This is for the RecyclerView for the stores
@@ -75,6 +80,7 @@ public class StoreActivity extends AppCompatActivity {
         databaseHelper.addToDatabase();
         arrayList = databaseHelper.getStores();
 
+
         //For progress bar and text view and search
         mProgressBar = (ProgressBar) findViewById(R.id.StoreProgressBar);
         mProgressBar.setVisibility(View.VISIBLE);
@@ -85,13 +91,13 @@ public class StoreActivity extends AppCompatActivity {
         mAdapter = new RecyclerViewStoreAdapter(arrayList, this);
         mRecyclerViewStore.setAdapter(mAdapter);
         //setupSearchView();
-
+        mStores = new ArrayList<>();
+        for (String store : STORES){
+            mStores.add(new Store(new String[]{store}));
+        }
         handleIntent(getIntent());
 
     }
-
-
-
 
 //      Adapter searchAdapter = new CursorAdapter(this, cursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
 
@@ -141,6 +147,7 @@ public class StoreActivity extends AppCompatActivity {
                    arrayList.addAll(DatabaseHelper.getInstance(StoreActivity.this).searchStoreList(query));
                     mAdapter.notifyDataSetChanged();
                   //  List<Store> stores = DatabaseHelper.getInstance(StoreActivity.this).searchStoreList(query);
+
                 }
             }
             //Below is to inflate the tool bar menu
@@ -167,7 +174,7 @@ public class StoreActivity extends AppCompatActivity {
 
 //        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 //        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//        searchView.setOnQueryTextListener(this);
+        searchView.setOnQueryTextListener(this);
 
        return super.onCreateOptionsMenu(menu);
                // return true;
@@ -186,7 +193,14 @@ public class StoreActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-            //Below is to add actions to items in the menu
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+
+    //Below is to add actions to items in the menu
 
 
             //  private void setupSearchView() {
@@ -196,39 +210,50 @@ public class StoreActivity extends AppCompatActivity {
 //        mSearchView.setOnQueryTextListener(this);
 //        mSearchView.setSubmitButtonEnabled(true);
 //        mSearchView.setQueryHint("search for stores");
-        }
+
 //    @Override
 //    public boolean onQueryTextSubmit(String query) {
 //        return false;
 //    }
 //
-//    @Override
-//    public boolean onQueryTextChange(String query) {
-//        List<Store> filteredStoreList = filter(arrayList,query);
-//        try {
-//            mAdapter.animateTo(filteredStoreList);
-//            mRecyclerViewStore.scrollToPosition(0);
-//
-//
-//        }
-//        catch (NullPointerException e) {
-//            e.printStackTrace();
-//        }
-//        return true;
-//    }
-//    private List<Store> filter(List<Store> stores, String query) {
-//        query = query.toLowerCase();
-//        final List<Store> filteredStoreList = new ArrayList<>();
-//        for(Store store: stores){
-//            final String text = store.getStoreName().toLowerCase();
-//            if(text.contains(query)) {
-//                filteredStoreList.add(store);
-//            }
-//        }
-//        return filteredStoreList;
-//    }
+    @Override
+    public boolean onQueryTextChange(String query) {
+        List<Store> filteredStoreList = filter(arrayList, query);
+        try {
+            mAdapter.animateTo(filteredStoreList);
+            mAdapter.filter(query);
+            mRecyclerViewStore.scrollToPosition(0);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+           private List<Store> filter (List<Store>stores, String query){
+               query = query.toLowerCase();
+               final List<Store> filteredStoreList = new ArrayList<>();
+               for (Store store : stores) {
+                   final String text = store.getStoreName().toLowerCase();
+                   if (text.contains(query)) {
+                       filteredStoreList.add(store);
+                   }
+                //   else if (text.contains(null))
+                //   else {
+                //       Toast.makeText(StoreActivity.this, "Test2", Toast.LENGTH_SHORT).show();
+                //       Log.d(TAG, "TestForNoList");
+                //       filteredStoreList.clear();
+                   }
+
+               return filteredStoreList;
+           }
+
+ //  @Override
+ //  public void onBackPressed() {
+ //      super.onBackPressed();
+ //      StoreManager.getInstance(this).clearCu
+ //  }
 
 
-
+}
 
 

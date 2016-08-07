@@ -6,12 +6,15 @@ package com.example.stacyzolnikov.project2shoppinglist2;
 public class Store {
     private int id;
      String storeName;
+    String[] storeName2;
     private String stars;
     private String reviews;
     private String photosID;
 
     public Store () {}
-
+    public Store (String[] text) {
+        this.storeName2 = text;
+    }
     public Store (int id, String storeName, String stars, String reviews, String photosID){
        this.id = id;
         this.storeName = storeName;
@@ -25,7 +28,6 @@ public class Store {
         this.reviews = reviews;
         this.stars = stars;
     }
-
 
 
 

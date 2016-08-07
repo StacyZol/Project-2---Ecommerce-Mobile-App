@@ -47,4 +47,12 @@ public class StoreManager {
         Toast.makeText(context, "Test", Toast.LENGTH_LONG).show();
 
     }
+    public void forceRecyclerViewRefresh(String storeName){
+        for (Store store : stores){
+            if (store.getStoreName().equals(storeName)){
+                store.setStoreName((store.getStoreName() + ""));
+                break;
+            }
+        }
+    }
 }

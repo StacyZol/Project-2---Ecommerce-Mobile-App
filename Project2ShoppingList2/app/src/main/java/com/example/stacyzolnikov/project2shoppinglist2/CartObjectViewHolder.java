@@ -9,7 +9,7 @@ import android.widget.TextView;
 /**
  * Created by stacyzolnikov on 7/28/16.
  */
-public class CartObjectViewHolder extends RecyclerView.ViewHolder {
+public class  CartObjectViewHolder extends RecyclerView.ViewHolder {
 
     public TextView mShirtName;
     public TextView mPrice;

@@ -17,16 +17,17 @@ import java.util.List;
  * Created by stacyzolnikov on 7/20/16.
  */
 public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHolder> {
-    List<Store> stores, filterList;
+    List<Store> mStores, filterList;
     Context context;
      LayoutInflater mInflater;
 
 
     public RecyclerViewStoreAdapter(List<Store> stores, Context context) {
-        this.stores = stores;
+        //this.mStores = stores;
+        mStores = new ArrayList<>(stores);
         this.context = context;
         this.filterList = new ArrayList<Store>();
-        this.filterList.addAll(this.stores);
+        this.filterList.addAll(this.mStores);
         mInflater = LayoutInflater.from(context);
     }
 
@@ -44,12 +45,12 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
 
     @Override
     public void onBindViewHolder(StoreViewHolder holder, final int position) {
-        Store store = filterList.get(position);
-        holder.mStoreName.setText(stores.get(position).getStoreName());
-        holder.mReviews.setText(stores.get(position).getReviews());
-        int imageResource2 = context.getResources().getIdentifier(stores.get(position).getStars().replace(".png", ""), "drawable", context.getPackageName());
+        Store storesNew = filterList.get(position);
+        holder.mStoreName.setText(mStores.get(position).getStoreName());
+        holder.mReviews.setText(mStores.get(position).getReviews());
+        int imageResource2 = context.getResources().getIdentifier(mStores.get(position).getStars().replace(".png", ""), "drawable", context.getPackageName());
         holder.mStars.setImageResource(imageResource2);
-        int imageResource = context.getResources().getIdentifier(stores.get(position).getPhotos().replace(".png", ""), "drawable", context.getPackageName());
+        int imageResource = context.getResources().getIdentifier(mStores.get(position).getPhotos().replace(".png", ""), "drawable", context.getPackageName());
         holder.mPhotos.setImageResource(imageResource);
 
         // holder.mReviews.setOnClickListener
@@ -58,8 +59,8 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
         //This is for search
 
 
-        final Store storeNew = stores.get(position);
-        holder.bind(storeNew);
+        //final Store storesNew = mStores.get(position);
+        holder.bind(storesNew);
 
 
         holder.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +68,7 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ClothesActivity.class);
-                intent.putExtra("position", position);
+                intent.putExtra("position", DatabaseHelper.COL_STORE_LOGO);
                 view.getContext().startActivity(intent);
 
 
@@ -78,92 +79,97 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
 
     @Override
     public int getItemCount() {
-        if (stores == null) {
+        if (mStores == null) {
             return 0;
         } else {
-            return stores.size();
+            return mStores.size();
         }
     }
-    public void filter(final String text) {
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                filterList.clear();
-                if(TextUtils.isEmpty(text)){
-                    filterList.addAll(stores);
-            }
-                else {
-                    for(Store stores2: stores){
-                        if(stores2.storeName.toLowerCase().contains(text.toLowerCase())){
-                            filterList.add(stores2);
-                        }
-
-                    }
-                }
-                ((Activity)context).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        notifyDataSetChanged();
-                    }
-                });
-            }
-        }).start();
-    }
-
     public void setStore (List<Store> storesNew) {
-        stores = new ArrayList<>(storesNew);
+        mStores = new ArrayList<>(storesNew);
     }
+
 
     public Store removeItem(int position) {
-        Store store = stores.remove(position);
+        Store storesNew = mStores.remove(position);
         notifyItemRemoved(position);
-        return store;
+        return storesNew;
     }
-
-    public void addStore (int position, Store storeNew) {
-        stores.add(position, storeNew);
+    public void addItem (int position, Store storesNew) {
+        mStores.add(position, storesNew);
         notifyItemInserted(position);
     }
 
+
     public void moveItem (int fromPosition, int toPosition) {
-        final Store storeNew = stores.remove(fromPosition);
-        stores.add(toPosition, storeNew);
+        final Store storesNew = mStores.remove(fromPosition);
+        mStores.add(toPosition, storesNew);
         notifyItemMoved(fromPosition, toPosition);
 
     }
 
-    public void animateTo(List<Store> storeNew) {
-        applyAndAnimateRemovals(storeNew);
-        applyAndAnimateAdditions(storeNew);
-        applyAndAnimateMovedItems(storeNew);
+    public void animateTo(List<Store> storesNew) {
+        applyAndAnimateRemovals(storesNew);
+        applyAndAnimateAdditions(storesNew);
+        applyAndAnimateMovedItems(storesNew);
     }
 
     private void applyAndAnimateRemovals(List<Store> newStores) {
-        for (int i = stores.size() - 1; i>=0; i--){
-            Store store = stores.get(i);
-            if(!newStores.contains(store)){
+        for (int i = mStores.size() - 1; i>=0; i--){
+            Store storesNew = mStores.get(i);
+            if(!newStores.contains(storesNew)){
                 removeItem(i);
             }
         }
     }
     private void applyAndAnimateAdditions (List<Store> newStores) {
-        for (int i = 0, count = newStores.size(); i<count; i++){
-            Store store = stores.get(i);
-            if(!stores.contains(store)) {
-                addStore(i, store);
-            }
+       for (int i = 0, count = newStores.size(); i<count; i++){
+           Store storesNew = newStores.get(i);
+           if(!mStores.contains(storesNew)) {
+               addItem(i, storesNew);
+           }
+
         }
     }
 
     private void applyAndAnimateMovedItems (List<Store> newStores) {
-        for (int toPosition = newStores.size() - 1; toPosition >=0; toPosition--){
-            Store store = newStores.get(toPosition);
-            final int fromPosition = stores.indexOf(store);
+        for (int toPosition = newStores.size() - 1; toPosition >= 0; toPosition--) {
+            Store storesNew = newStores.get(toPosition);
+            final int fromPosition = mStores.indexOf(storesNew);
             if (fromPosition >= 0 && fromPosition != toPosition) {
                 moveItem(fromPosition, toPosition);
             }
         }
     }
 
-}
+
+        public void filter(final String text) {
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    filterList.clear();
+                    if(TextUtils.isEmpty(text)){
+                        filterList.addAll(mStores);
+                    }
+                    else {
+                        for(Store stores2: mStores){
+                            if(stores2.storeName.toLowerCase().contains(text.toLowerCase())){
+                                filterList.add(stores2);
+                            }
+                        }
+                        filterList.clear();
+                        filterList.addAll(mStores);
+                    }
+                    ((Activity)context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            notifyDataSetChanged();
+                        }
+                    });
+                }
+            }).start();
+        }
+    }
+
+

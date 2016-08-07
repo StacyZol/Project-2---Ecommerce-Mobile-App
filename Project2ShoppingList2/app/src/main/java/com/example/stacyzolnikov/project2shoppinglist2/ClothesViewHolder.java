@@ -16,6 +16,7 @@ public class ClothesViewHolder extends RecyclerView.ViewHolder {
     public TextView mMoreColors;
     public ImageView mShirtPhotos;
     public CardView mCardView;
+   // public ImageView mItemHeader;
 
     public ClothesViewHolder(View itemView) {
         super(itemView);
@@ -25,6 +26,7 @@ public class ClothesViewHolder extends RecyclerView.ViewHolder {
         mPrice = (TextView) itemView.findViewById(R.id.PriceID);
         mShirtPhotos = (ImageView) itemView.findViewById(R.id.ItemPhotosID);
         mCardView = (CardView) itemView.findViewById(R.id.CustomItemView);
+       // mItemHeader = (ImageView) itemView.findViewById(R.id.items_header);
     }
 
 

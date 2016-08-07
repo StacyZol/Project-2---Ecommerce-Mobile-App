@@ -42,6 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_TOP_PHOTO = "TOP_PHOTO";
     public static final String COL_TOP_PRICE = "TOP_PRICE";
     public static final String COL_STORE_NAME_SHIRT = "STORE_NAME_SHIRT";
+   // public static final String COL_STORE_PHOTO = "STORE_PHOTO";
 
     public static final String[] TOP_COLUMNS = {COL_ID_TOP, COL_HEART_TOP, COL_TOP_NAME, COL_TOP_PHOTO, COL_TOP_PRICE, COL_STORE_NAME_SHIRT};
 
@@ -101,7 +102,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COL_HEART_TOP + " TEXT," +
                     COL_TOP_PRICE + " TEXT," +
                     COL_TOP_PHOTO + " TEXT," +
-                    COL_STORE_NAME_SHIRT + " TEXT" +  ")";
+                    COL_STORE_NAME_SHIRT + " TEXT," +
+                    //COL_STORE_PHOTO + " TEXT" +
+                    ")";
 
 
     //Need to add for other tables
@@ -132,7 +135,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_TOP_PHOTO, shirt.getShirtPhotosID());
         values.put(COL_TOP_PRICE, shirt.getPrice());
         //values.put(COL_STORE_NAME_SHIRT, shirt.getStoreNameShirt());
-        db.insert(SHIRT_TABLE_NAME,"", values);
+        //values.put(COL_STORE_PHOTO, shirt.getStorePhoto());
+        db.insertOrThrow(SHIRT_TABLE_NAME,"", values);
         db.close();
 
     }
@@ -195,21 +199,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM SHIRT_LIST", null);
         List<Shirt> shirts = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                int id = cursor.getInt(cursor.getColumnIndex(COL_ID_TOP));
-                String shirtName = cursor.getString(cursor.getColumnIndex(COL_TOP_NAME));
-                String heart = cursor.getString(cursor.getColumnIndex(COL_HEART_TOP));
-                String price = cursor.getString(cursor.getColumnIndex(COL_TOP_PRICE));
-                String shirtPhotosID = cursor.getString(cursor.getColumnIndex(COL_TOP_PHOTO));
-                String storeNameShirt = cursor.getString(cursor.getColumnIndex(COL_STORE_NAME_SHIRT));
-                shirts.add(new Shirt(id, shirtName, heart, price, shirtPhotosID, storeNameShirt));
-                cursor.moveToNext();
+       // try {
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast()) {
+                    int id = cursor.getInt(cursor.getColumnIndex(COL_ID_TOP));
+                    String shirtName = cursor.getString(cursor.getColumnIndex(COL_TOP_NAME));
+                    String heart = cursor.getString(cursor.getColumnIndex(COL_HEART_TOP));
+                    String price = cursor.getString(cursor.getColumnIndex(COL_TOP_PRICE));
+                    String shirtPhotosID = cursor.getString(cursor.getColumnIndex(COL_TOP_PHOTO));
+                    String storeNameShirt = cursor.getString(cursor.getColumnIndex(COL_STORE_NAME_SHIRT));
+                   // String storePhoto = cursor.getString(cursor.getColumnIndex(COL_STORE_PHOTO));
+
+                    shirts.add(new Shirt(id, shirtName, heart, price, shirtPhotosID, storeNameShirt));
+
+                    cursor.moveToNext();
+                }
             }
-        }
-            cursor.close();
-            return shirts;
-        }
+          //  cursor.close();
+          //  return shirts;
+
+      //  }
+      //  catch (IllegalStateException e) {
+       //     e.printStackTrace();
+      //  }
+        cursor.close();
+        return shirts;
+    }
 
 
     public void addToDatabase() {
@@ -274,20 +289,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertShirtRow(shirt11);
         insertShirtRow(shirt12);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 }
