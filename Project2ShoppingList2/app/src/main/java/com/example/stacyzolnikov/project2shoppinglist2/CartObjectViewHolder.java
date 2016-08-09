@@ -14,12 +14,14 @@ public class  CartObjectViewHolder extends RecyclerView.ViewHolder {
     public TextView mShirtName;
     public TextView mPrice;
     public TextView mShirtPhotos;
+    public CardView mCardView;
 
 
     public CartObjectViewHolder(View itemView) {
         super(itemView);
         mShirtName = (TextView) itemView.findViewById(R.id.ItemNameID);
-        mPrice = (TextView) itemView.findViewById(R.id.ItemPriceID);
+        mPrice = (TextView) itemView.findViewById(R.id.cartPerUnitPrice);
+        mCardView = (CardView) itemView.findViewById(R.id.CustomCartItemView);
       //  mShirtName = (TextView) itemView.findViewById(R.id.ItemPhotosID)
     }
     

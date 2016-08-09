@@ -1,5 +1,7 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import java.util.List;
  * Created by stacyzolnikov on 7/28/16.
  */
 public class ShoppingCartSingleton {
+    private static final String TAG = "Singleton" ;
     List<CartObject> cartObjectList1;
 
     private ShoppingCartSingleton() {
@@ -29,13 +32,22 @@ public class ShoppingCartSingleton {
         return cartObjectList1;
     }
 
-    public void setCartObjectList1(List<CartObject> cartObjectList1){
+    public void setCartObjectList1(List<CartObject> cartObjectList1) {
         this.cartObjectList1 = cartObjectList1;
     }
 
-    public void addCartObject (CartObject object) {
+    public void addCartObject(CartObject object) {
         cartObjectList1.add(object);
     }
+    public Double getTotalPrice () {
+        Double totalCost = 0.0;
+        for (CartObject cartObject : cartObjectList1) {
+            totalCost += totalCost + Double.parseDouble(cartObject.getPrice());
+            Log.d(TAG, "getTotalPrice: Test");
+            Log.i(TAG, "getTotalPrice: totalcost" + totalCost);
+        }
+        return totalCost;
 
+    }
 
-}
+    }

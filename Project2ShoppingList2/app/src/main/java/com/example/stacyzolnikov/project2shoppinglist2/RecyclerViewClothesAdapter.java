@@ -11,8 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by stacyzolnikov on 7/26/16.
@@ -51,8 +53,12 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
     public void onBindViewHolder(final ClothesViewHolder holder, final int position) {
         Shirt shirt = shirts.get(position);
         holder.mShirtName.setText(shirts.get(position).getShirtName());
-        holder.mPrice.setText(shirts.get(position).getPrice());
-//
+        //int price = shirts.get(position).getPrice();
+       //int cost = shirts.get(position).getPrice();
+              //  "$" + String.valueOf(shirts.get(position).getPrice());
+        //int cost = Integer.parseInt(String.valueOf(shirts.get(position).getPrice()));
+      //  holder.mPrice.setText("$ " + price);
+       holder.mPrice.setText("$" + shirts.get(position).getPrice());
         int imageResource = mContext.getResources().getIdentifier(shirts.get(position).getHeart().replace(".png", ""), "drawable", mContext.getPackageName());
         holder.mHeart.setImageResource(imageResource);
         int imageResource2 = mContext.getResources().getIdentifier(shirts.get(position).getShirtPhotosID().replace(".png", ""), "drawable", mContext.getPackageName());
@@ -69,6 +75,13 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
                 AddToCartDialogFragment addToCart = new AddToCartDialogFragment(shirts, position);
                 addToCart.show(fm, "add_to_cart");
 
+            }
+        });
+
+        holder.mHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Added to favorites", Toast.LENGTH_LONG).show();
             }
         });
 

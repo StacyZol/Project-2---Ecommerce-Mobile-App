@@ -102,7 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COL_HEART_TOP + " TEXT," +
                     COL_TOP_PRICE + " TEXT," +
                     COL_TOP_PHOTO + " TEXT," +
-                    COL_STORE_NAME_SHIRT + " TEXT," +
+                    COL_STORE_NAME_SHIRT + " TEXT" +
                     //COL_STORE_PHOTO + " TEXT" +
                     ")";
 
@@ -230,7 +230,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void addToDatabase() {
         SQLiteDatabase db = getWritableDatabase();
         Store store = new Store ("Macy's" , "four_stars", "20 reviews", "macys_logo");
-        Store store1 = new Store ("ZARA", "3 stars", "4 reviews", "zara_logo.png");
+        Store store1 = new Store ("ZARA", "four_stars", "4 reviews", "zara_logo.png");
         Store store2 = new Store ("Coach", "5 stars", "22 reviews", "coach_logo.png");
         Store store3 = new Store ("3 stars", "Nordstrom", "25 reviews", "@drawable");
         Store store4 = new Store ("2 stars", "Express", "26 reviews","@drawable" );
@@ -261,19 +261,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void addToShirts () {
         SQLiteDatabase db = getWritableDatabase();
-        Shirt shirt = new Shirt ( "Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Macys");
-        Shirt shirt1 = new Shirt ("Off Shoulder Shirt" , "@drawableheart", "$6.00", "@drawablephoto", "ZARA");
-        Shirt shirt2 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "ZARA");
-        Shirt shirt3 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Macys");
-        Shirt shirt4 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "ZARA");
-        Shirt shirt5 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Macys");
-        Shirt shirt6 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Bloomingdales");
-        Shirt shirt7 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Bloomingdales");
-        Shirt shirt8 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "ZARA");
-        Shirt shirt9 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Macys");
-        Shirt shirt10 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Bloomingdales");
-        Shirt shirt11 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Bloomingdales");
-        Shirt shirt12 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "$6.00", "@drawablephoto", "Bloomingdales");
+        Shirt shirt = new Shirt ( "Tie Neck Tunic" , "@drawableheart", "6.00", "@drawablephoto", "Macys");
+        Shirt shirt1 = new Shirt ("Off Shoulder Shirt" , "@drawableheart", "12.00", "@drawablephoto", "ZARA");
+        Shirt shirt2 = new Shirt ("Tie Dye Tank Top" , "@drawableheart", "14.00", "@drawablephoto", "ZARA");
+        Shirt shirt3 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24.00", "@drawablephoto", "Macys");
+        Shirt shirt4 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "4.00", "@drawablephoto", "ZARA");
+        Shirt shirt5 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "5.00", "@drawablephoto", "Macys");
+        Shirt shirt6 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "4.00", "@drawablephoto", "Bloomingdales");
+        Shirt shirt7 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
+        Shirt shirt8 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "ZARA");
+        Shirt shirt9 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Macys");
+        Shirt shirt10 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
+        Shirt shirt11 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
+        Shirt shirt12 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
 
         insertShirtRow(shirt);
         insertShirtRow(shirt1);
@@ -289,5 +289,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertShirtRow(shirt11);
         insertShirtRow(shirt12);
     }
-    
+
 }

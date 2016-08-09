@@ -62,9 +62,6 @@ public class AddToCartDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.add_to_cart_dialog, container);
 
-
-
-
     }
 
     @Override
@@ -84,6 +81,8 @@ public class AddToCartDialogFragment extends DialogFragment {
                 shoppingCartSingleton.addCartObject(new CartObject(shirts.get(position).getShirtName(), shirts.get(position).getPrice(), shirts.get(position).getShirtPhotosID()));
 //                shoppingCartSingleton.addCartObject(new CartObject("Testabcd", "123", "blah"));
                 getDialog().dismiss();
+                Toast.makeText(getContext(), "Added to Cart", Toast.LENGTH_LONG).show();
+
             }
         });
 

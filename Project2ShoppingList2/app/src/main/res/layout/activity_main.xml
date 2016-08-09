@@ -8,13 +8,14 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shoppingbag3"/>
+        android:background="@drawable/tree"/>
 
     <Button
         android:layout_width="280dp"
         android:layout_height="80dp"
-        android:text="Let's Go Shopping!"
+        android:text="Get Stared"
         android:textSize="30dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/shape"
         android:textColor="#FFFFFF"
         android:layout_gravity="center"

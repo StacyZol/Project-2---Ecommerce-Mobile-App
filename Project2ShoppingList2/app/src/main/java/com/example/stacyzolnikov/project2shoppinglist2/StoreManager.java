@@ -20,6 +20,7 @@ public class StoreManager {
         this.context = context;
         stores = new ArrayList<Store>();
 
+
         AsyncTask<Context, Void, ArrayList<Store>> task1 = new AsyncTask<Context, Void, ArrayList<Store>>() {
             @Override
             protected ArrayList<Store> doInBackground(Context... contexts) {

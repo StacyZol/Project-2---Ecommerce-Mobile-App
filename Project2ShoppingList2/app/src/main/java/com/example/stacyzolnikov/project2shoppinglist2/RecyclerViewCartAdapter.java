@@ -1,5 +1,6 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,18 @@ import java.util.List;
  * Created by stacyzolnikov on 7/28/16.
  */
 public class RecyclerViewCartAdapter extends RecyclerView.Adapter<CartObjectViewHolder> {
+    private Context mContext;
     List<CartObject> cartObjectList1;
+    List<ClothesInCart> mClothesItemList;
 
     public RecyclerViewCartAdapter(List<CartObject> cartObjectList) {
         cartObjectList1 = cartObjectList;
     }
+
+ //   public RecyclerViewCartAdapter(List<CartObject> mClothesItemList, Context context) {
+ //       mClothesItemList = cartObjectList1;
+ //
+ //   }
 
     @Override
     public CartObjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -28,8 +36,8 @@ public class RecyclerViewCartAdapter extends RecyclerView.Adapter<CartObjectView
     @Override
     public void onBindViewHolder(CartObjectViewHolder holder, int position) {
         holder.mShirtName.setText(cartObjectList1.get(position).getShirtName());
-        holder.mPrice.setText(cartObjectList1.get(position).getPrice());
-       // holder.mShirtPhotosID.setText(cartObjectList1.get(position).getShirtPhotosID());
+        String cost = "$" + cartObjectList1.get(position).getPrice();
+        holder.mPrice.setText(cost);
 
 
     }
