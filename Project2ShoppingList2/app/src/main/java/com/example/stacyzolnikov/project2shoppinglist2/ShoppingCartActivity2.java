@@ -1,5 +1,6 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,30 +40,58 @@ public class ShoppingCartActivity2 extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewCart.setLayoutManager(linearLayoutManager);
 
+        cartObjectList = (List<CartObject>) singleton.getCartObjectList1();
+
         mAdapter = new RecyclerViewCartAdapter(singleton.getCartObjectList1());
 
         mButtonDelete = (Button) findViewById(R.id.DeleteAllButton);
 
         mRecyclerViewCart.setAdapter(mAdapter);
-        mButtonDelete.setOnClickListener(new View.OnClickListener()
 
-        {
+
+ //      mButtonDelete.setOnClickListener(new View.OnClickListener() {
+ //          @Override
+ //          public void onClick(View view) {
+ //              mRecyclerViewCart.removeAllViewsInLayout();
+ //              mRecyclerViewCart.removeView(view);
+ //              //Need to update price to 0
+ //          }
+ //      });
+
+        mButtonDelete.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                mRecyclerViewCart.removeAllViewsInLayout();
-                mRecyclerViewCart.removeView(view);
-                //Need to update price to 0
+                if (cartObjectList.size() == 0) {
+                    Toast.makeText(ShoppingCartActivity2.this, "Your shopping cart is empty.", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    final List<CartObject> temp = new LinkedList<CartObject>(cartObjectList);
+                    cartObjectList.clear();
+                    mAdapter.notifyDataSetChanged();
+                    mTotalPrice.setText("$" + String.format(Locale.ENGLISH, "%.2f", ShoppingCartSingleton.getInstance().getTotalPrice()));
+                    Snackbar.make(mRecyclerViewCart, "Removed all items from basket.", Snackbar.LENGTH_LONG).
+                            setAction("Undo", new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View view) {
+                                    cartObjectList = temp;
+                                    mAdapter.setCartObjectList1(cartObjectList);
+                                    mAdapter.notifyItemRangeInserted(0, cartObjectList.size());
+                                    mTotalPrice.setText("$" + String.format(Locale.ENGLISH, "%.2f", ShoppingCartSingleton.getInstance().getTotalPrice()));
+
+                                }
+                            })
+                            .show();
+                    mAdapter.notifyDataSetChanged();
+                }
             }
-        }
+        });
+
+  }
 
 
-        );
-
-        //set listview.adapter
-
-    }
-
-
-    }
+}
 
 

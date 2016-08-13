@@ -229,19 +229,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void addToDatabase() {
         SQLiteDatabase db = getWritableDatabase();
-        Store store = new Store ("Macy's" , "four_stars", "20 reviews", "macys_logo");
-        Store store1 = new Store ("ZARA", "four_stars", "4 reviews", "zara_logo.png");
-        Store store2 = new Store ("Coach", "5 stars", "22 reviews", "coach_logo.png");
-        Store store3 = new Store ("3 stars", "Nordstrom", "25 reviews", "@drawable");
-        Store store4 = new Store ("2 stars", "Express", "26 reviews","@drawable" );
-        Store store5 = new Store ("4 stars", "H&M",  "47 reviews","@drawable" );
-        Store store6 = new Store ("5 stars", "Bloomingdales", "3 reviews", "@drawable");
-        Store store7 = new Store ("3 stars", "Saks Fith Avenue",  "2 reviews", "@drawable");
-        Store store8 = new Store ("5 stars", "Guess", "0 reviews", "@drawable");
-        Store store9 = new Store ("3 stars", "Ralph Lauren",  "33 reviews", "@drawable");
-        Store store10 = new Store ("5 stars", "Target", "32 reviews", "@drawable");
-        Store store11 = new Store ("4 stars", "Calvin Klein",  "2 reviews", "@drawable");
-        Store store12 = new Store ("3 stars", "Old Navy",  "1 reviews","@drawable");
+        Store store = new Store ("Store One" , "four_stars", "20 reviews", "tree_one");
+        Store store1 = new Store ("Store Two", "four_stars", "4 reviews", "tree_two");
+        Store store2 = new Store ("Store Three", "one_five_stars", "22 reviews", "tree_three");
+        Store store3 = new Store ("Store Four", "three_five_stars", "25 reviews", "@drawable");
+        Store store4 = new Store ("Store Five", "four_stars", "26 reviews","@drawable" );
+        Store store5 = new Store ("Store Six", "four_stars",  "47 reviews","@drawable" );
+        Store store6 = new Store ("Store Seven", "four_stars", "3 reviews", "@drawable");
+        Store store7 = new Store ("Store Eight", "four_stars",  "2 reviews", "@drawable");
+        Store store8 = new Store ("Store Nine", "four_stars", "0 reviews", "@drawable");
+        Store store9 = new Store ("Store Ten", "four_stars",  "33 reviews", "@drawable");
+        Store store10 = new Store ("Store Eleven", "four_stars", "32 reviews", "@drawable");
+        Store store11 = new Store ("Store Twelve", "four_stars",  "2 reviews", "@drawable");
+        Store store12 = new Store ("Store Thirteen", "four_stars",  "1 reviews","@drawable");
 
         insertRowStore(store);
         insertRowStore(store1);
@@ -261,19 +261,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void addToShirts () {
         SQLiteDatabase db = getWritableDatabase();
-        Shirt shirt = new Shirt ( "Tie Neck Tunic" , "@drawableheart", "6.00", "@drawablephoto", "Macys");
-        Shirt shirt1 = new Shirt ("Off Shoulder Shirt" , "@drawableheart", "12.00", "@drawablephoto", "ZARA");
-        Shirt shirt2 = new Shirt ("Tie Dye Tank Top" , "@drawableheart", "14.00", "@drawablephoto", "ZARA");
-        Shirt shirt3 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24.00", "@drawablephoto", "Macys");
-        Shirt shirt4 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "4.00", "@drawablephoto", "ZARA");
-        Shirt shirt5 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "5.00", "@drawablephoto", "Macys");
-        Shirt shirt6 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "4.00", "@drawablephoto", "Bloomingdales");
-        Shirt shirt7 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
-        Shirt shirt8 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "ZARA");
-        Shirt shirt9 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Macys");
-        Shirt shirt10 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
-        Shirt shirt11 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
-        Shirt shirt12 = new Shirt ("Tie Neck Tunic" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
+        Shirt shirt = new Shirt ( "Item One" , "@drawableheart", "6.00", "@drawablephoto", "Macys");
+        Shirt shirt1 = new Shirt ("Item Two" , "@drawableheart", "12.00", "@drawablephoto", "ZARA");
+        Shirt shirt2 = new Shirt ("Item Three" , "@drawableheart", "14.00", "@drawablephoto", "ZARA");
+        Shirt shirt3 = new Shirt ("Item Four" , "@drawableheart", "24.00", "@drawablephoto", "Macys");
+        Shirt shirt4 = new Shirt ("Item Five" , "@drawableheart", "4.00", "@drawablephoto", "ZARA");
+        Shirt shirt5 = new Shirt ("Item Six" , "@drawableheart", "5.00", "@drawablephoto", "Macys");
+        Shirt shirt6 = new Shirt ("Item Seven" , "@drawableheart", "4.00", "@drawablephoto", "Bloomingdales");
+        Shirt shirt7 = new Shirt ("Item Eight" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
+        Shirt shirt8 = new Shirt ("Item Nine" , "@drawableheart", "24", "@drawablephoto", "ZARA");
+        Shirt shirt9 = new Shirt ("Item Ten" , "@drawableheart", "24", "@drawablephoto", "Macys");
+        Shirt shirt10 = new Shirt ("Item Eleven" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
+        Shirt shirt11 = new Shirt ("Item Twelve" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
+        Shirt shirt12 = new Shirt ("Item Thirteen" , "@drawableheart", "24", "@drawablephoto", "Bloomingdales");
 
         insertShirtRow(shirt);
         insertShirtRow(shirt1);

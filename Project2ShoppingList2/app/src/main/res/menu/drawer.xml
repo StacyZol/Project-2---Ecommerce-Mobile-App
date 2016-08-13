@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="all">
+       <item
+           android:title="Home"
+           android:icon="@drawable/ic_home_black_24dp"
+           android:id="@+id/draw_home"/>
+        <item
+            android:title="Shopping Cart"
+            android:id="@+id/draw_cart"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"/>
+        <item
+            android:title="My addresses"
+            android:icon="@drawable/ic_book_black_24dp"
+            android:id="@+id/draw_addresses"
+            />
+        <item
+            android:title="My payments"
+            android:icon="@drawable/ic_credit_card_black_24dp"
+            android:id="@+id/draw_payments"/>
+
+        <item
+            android:title="Info"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:id="@+id/draw_info"/>
+        <item
+            android:title="Favorites"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:id="@+id/draw_favorites"/>
+
+    </group>
+</menu>

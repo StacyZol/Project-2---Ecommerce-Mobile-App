@@ -42,7 +42,8 @@ public class ShoppingCartSingleton {
     public Double getTotalPrice () {
         Double totalCost = 0.0;
         for (CartObject cartObject : cartObjectList1) {
-            totalCost += totalCost + Double.parseDouble(cartObject.getPrice());
+            //totalCost += cartObjectList1.size() * Double.parseDouble(cartObject.getPrice());
+            totalCost = totalCost + Double.parseDouble(cartObject.getPrice());
             Log.d(TAG, "getTotalPrice: Test");
             Log.i(TAG, "getTotalPrice: totalcost" + totalCost);
         }

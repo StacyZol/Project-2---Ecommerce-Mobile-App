@@ -71,11 +71,11 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             default:
             case 0:
-                return "Tops";
+                return "Category One";
             case 1:
-                return "Bottoms";
+                return "Category Two";
             case 2:
-                return "Shoes";
+                return "Category Three";
         }
     }
 

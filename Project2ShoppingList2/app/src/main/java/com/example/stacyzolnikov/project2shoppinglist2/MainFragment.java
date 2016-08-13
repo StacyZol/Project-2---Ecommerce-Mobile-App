@@ -91,7 +91,7 @@ public class MainFragment extends Fragment {
                 return true;
             case R.id.ShoppingCart:
                 return true;
-            case R.id.NavBar:
+            case R.id.action_settings:
                 return true;
         }
         return super.onOptionsItemSelected(item);

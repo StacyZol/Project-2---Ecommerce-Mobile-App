@@ -10,7 +10,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -28,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -41,7 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StoreActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class StoreActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "StoreActivity";
 
     RecyclerView mRecyclerViewStore;
@@ -56,6 +61,11 @@ public class StoreActivity extends AppCompatActivity implements SearchView.OnQue
     Toolbar mToolbar;
     String[] filteredList;
     List<Store> mStores;
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mActionBarDrawerToggle;
+    private String[] mNavTitles;
+    private ListView mDrawerList;
+    private ArrayAdapter<String> navAdapter;
 
 
     @Override
@@ -64,13 +74,21 @@ public class StoreActivity extends AppCompatActivity implements SearchView.OnQue
         setContentView(R.layout.activity_store);
         CardView cardview = (CardView) findViewById(R.id.CustomStoreView);
         filteredList = DatabaseHelper.STORE_COLUMNS;
-        final String[] STORES = new String[]{
-                "Macy's", "ZARA"
-        };
+     //   final String[] STORES = new String[]{
+     //           "Macy's", "ZARA"
+     //   };
         mStores = new ArrayList<>();
-        final Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+       final Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+       setSupportActionBar(mToolbar);
+       // mNavTitles = getResources().getStringArray(R.array.nav_drawer_items);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,mToolbar, R.string.drawer_open, R.string.drawer_close);
+       drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+      //  mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         //This is for the RecyclerView for the stores
         mRecyclerViewStore = (RecyclerView) findViewById(R.id.StoresRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -83,7 +101,8 @@ public class StoreActivity extends AppCompatActivity implements SearchView.OnQue
 
         //For progress bar and text view and search
         mProgressBar = (ProgressBar) findViewById(R.id.StoreProgressBar);
-        mProgressBar.setVisibility(View.VISIBLE);
+        //will need to make it to visible when add it to tasks
+        mProgressBar.setVisibility(View.INVISIBLE);
 
         mTextView = (TextView) findViewById(R.id.NumberOfStoresText);
         mSearchView = (SearchView) findViewById(R.id.SearchStoresOptions);
@@ -91,15 +110,25 @@ public class StoreActivity extends AppCompatActivity implements SearchView.OnQue
         mAdapter = new RecyclerViewStoreAdapter(arrayList, this);
         mRecyclerViewStore.setAdapter(mAdapter);
         //setupSearchView();
-        mStores = new ArrayList<>();
-        for (String store : STORES){
-            mStores.add(new Store(new String[]{store}));
-        }
+     //   mStores = new ArrayList<>();
+     //   for (String store : STORES){
+     //       mStores.add(new Store(new String[]{store}));
+     //   }
         handleIntent(getIntent());
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else {
+            super.onBackPressed();
+        }
 
     }
 
-//      Adapter searchAdapter = new CursorAdapter(this, cursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
+    //      Adapter searchAdapter = new CursorAdapter(this, cursor, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER) {
 
 
             //     @Override
@@ -155,17 +184,9 @@ public class StoreActivity extends AppCompatActivity implements SearchView.OnQue
             public boolean onCreateOptionsMenu(Menu menu) {
                 MenuInflater inflater = getMenuInflater();
                 inflater.inflate(R.menu.main_menu, menu);
-
                 //Searchable configuration
                 SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-        //       MenuItem searchItem =   menu.findItem(R.id.SearchStoresOptions);
-              // MenuItem item = (MenuItem) menu.findItem(R.id.SearchStoresOptions).getActionView(item);
-               // SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-
-
                 SearchView searchView = (SearchView) menu.findItem(R.id.SearchStoresOptions).getActionView();
-
                // ComponentName componentName = new ComponentName(this, SearchActivity.class);
 
                 ComponentName componentName = getComponentName();
@@ -176,19 +197,21 @@ public class StoreActivity extends AppCompatActivity implements SearchView.OnQue
 //        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(this);
 
-       return super.onCreateOptionsMenu(menu);
-               // return true;
+       //return super.onCreateOptionsMenu(menu);
+               return true;
             }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_settings:
+
+                //return true;
+
             case R.id.SearchStores:
                 return true;
             case R.id.ShoppingCart:
                 Intent intent = new Intent(StoreActivity.this, ShoppingCartActivity2.class);
                 startActivity(intent);
-                return true;
-            case R.id.NavBar:
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -247,7 +270,36 @@ public class StoreActivity extends AppCompatActivity implements SearchView.OnQue
                return filteredStoreList;
            }
 
- //  @Override
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.draw_home){
+            //handle the home action
+
+        }
+        else if (id == R.id.draw_cart) {
+            //handle cart action
+            Intent intent = new Intent (StoreActivity.this, ShoppingCartActivity2.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.draw_addresses){
+            //handle address intent
+        }
+        else if (id == R.id.draw_favorites){
+            //hanlde favorites intent
+            Intent intent = new Intent (StoreActivity.this, FavoritesActivity.class);
+            startActivity(intent);
+
+        }
+        //add more
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
+
+    //  @Override
  //  public void onBackPressed() {
  //      super.onBackPressed();
  //      StoreManager.getInstance(this).clearCu

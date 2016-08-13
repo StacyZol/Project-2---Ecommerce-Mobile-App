@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">Stores</string>
     <string name="search_hint_stores">Search for a store</string>
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigatin Drawer</string>
+    <string name="action_settings">Settings</string>
     <string-array name="nav_drawer_items">
         <item>Home</item>
-        <item>Past Orders</item>
+        <item>Shopping Cart</item>
         <item> My Addresses</item>
-        <item> Order Status</item>
-        <item> My wallet</item>
+        <item> Payments</item>
+        <item> Info</item>
     </string-array>
     <array name="nav_drawer_icons">
 

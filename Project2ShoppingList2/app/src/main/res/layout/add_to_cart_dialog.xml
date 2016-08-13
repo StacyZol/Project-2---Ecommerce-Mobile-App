@@ -1,43 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="com.example.stacyzolnikov.project2shoppinglist2.AddToCartDialogFragment">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/tree"/>
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:text="Add to Cart"
+        android:textSize="25dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/shape"
+        android:textColor="#FFFFFF"
+        android:id="@+id/AddToCart"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+        android:text="Cancel"
+        android:textSize="30dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/shape"
+        android:textColor="#FFFFFF"
+       android:layout_gravity="bottom|center_horizontal"
+        android:id="@+id/NevermindID"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
 
-
-        >
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="#000000"
-            android:layout_margin="16dp"
-            android:id="@+id/ItemPhotosID"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add To Cart"
-            android:layout_marginBottom="10dp"
-            android:layout_alignTop="@+id/ItemPhotosID"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:background="@drawable/shape"
-            android:id="@+id/AddToCart"
-            android:layout_toRightOf="@+id/ItemPhotosID"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:text="Nevermind"
-            android:textSize="20dp"
-            android:background="@drawable/shape"
-            android:id="@+id/NevermindID"
-            android:layout_below="@+id/AddToCart"
-            android:layout_toRightOf="@+id/ItemPhotosID"
-            android:layout_marginRight="10dp"
-            />
-
-    </RelativeLayout>
-
+  </FrameLayout>

@@ -6,26 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.stacyzolnikov.project2shoppinglist2.ShoppingCartActivity2">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/shoppingCartToolbar"
+        android:id="@+id/favoritesToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#8E8E8E"
         android:elevation="4dp"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/AppTheme.PopupOverlay">
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remove All"
-                android:id="@+id/DeleteAllButton"
-                android:textSize="20dp"
-                android:layout_gravity="end|center_vertical"
-                android:background="?android:attr/selectableItemBackground"
-                />
-        </FrameLayout>
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
@@ -41,29 +28,29 @@
             android:paddingTop="60dp"
             android:paddingBottom="60dp">
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerviewcart"
+                android:id="@+id/recyclerviewFavorites"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-</FrameLayout>
+        </FrameLayout>
     </ScrollView>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/shoppingCartBottomToolbar"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/shoppingCartBottomToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8E8E8E"
+        android:elevation="4dp"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        >
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#8E8E8E"
-            android:elevation="4dp"
-            android:layout_gravity="bottom"
-            android:layout_alignParentBottom="true"
-           >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="$$$"
+                android:text=""
                 android:textStyle="bold"
                 android:textSize="24dp"
                 android:gravity="center"
@@ -72,11 +59,11 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Checkout"
+                android:text=""
                 android:id="@+id/checkoutButton"
                 android:background="?android:attr/selectableItemBackground"/>
-            </LinearLayout>
-        </android.support.v7.widget.Toolbar>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
 
 
 </RelativeLayout>

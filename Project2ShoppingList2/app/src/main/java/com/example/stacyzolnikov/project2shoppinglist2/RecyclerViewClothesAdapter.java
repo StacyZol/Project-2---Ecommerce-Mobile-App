@@ -51,7 +51,7 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
 
     @Override
     public void onBindViewHolder(final ClothesViewHolder holder, final int position) {
-        Shirt shirt = shirts.get(position);
+        final Shirt shirt = shirts.get(position);
         holder.mShirtName.setText(shirts.get(position).getShirtName());
         //int price = shirts.get(position).getPrice();
        //int cost = shirts.get(position).getPrice();
@@ -81,7 +81,16 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
         holder.mHeart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Added to favorites", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Added To Favorites", Toast.LENGTH_LONG).show();
+
+                final FavoritesSingleton favoritesSingleton = FavoritesSingleton.getInstance();
+                favoritesSingleton.addFavoritesObject(new FavoritesObject(shirts.get(position).getShirtName(), shirts.get(position).getShirtName(), shirts.get(position).getPrice()));
+
+//                shoppingCartSingleton.addCartObject(new CartObject("Testabcd", "123", "blah"));
+              //  Intent intent = new Intent(view.getContext(), FavoritesActivity.class);
+              //  intent.putExtra("position", position);
+              //  view.getContext().startActivity(intent);
+
             }
         });
 

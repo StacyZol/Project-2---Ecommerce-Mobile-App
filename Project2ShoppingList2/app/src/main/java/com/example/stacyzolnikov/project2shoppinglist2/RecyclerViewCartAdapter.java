@@ -24,6 +24,9 @@ public class RecyclerViewCartAdapter extends RecyclerView.Adapter<CartObjectView
  //       mClothesItemList = cartObjectList1;
  //
  //   }
+    public void setCartObjectList1(List<CartObject> cartObjectList1) {
+        this.cartObjectList1 = cartObjectList1;
+    }
 
     @Override
     public CartObjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

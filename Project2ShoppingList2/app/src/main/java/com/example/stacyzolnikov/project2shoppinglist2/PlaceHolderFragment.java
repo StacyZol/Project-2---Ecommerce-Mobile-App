@@ -59,14 +59,6 @@ public class PlaceHolderFragment extends Fragment {
         PlaceHolderFragment placeHolderFragment = new PlaceHolderFragment();
         placeHolderFragment.tabPosition = tab_number;
         placeHolderFragment.mListItemClickListener = listener;
-        //tabPosition = tab_number;
-        //mListItemClickListener = listener;
-
-     //   Bundle bundle = new Bundle();
-     //   bundle.putInt(TAB_NUMBER, tab_number);
-//
-     //   placeHolderFragment.setArguments(bundle);
-     //
         return placeHolderFragment;
     }
 
