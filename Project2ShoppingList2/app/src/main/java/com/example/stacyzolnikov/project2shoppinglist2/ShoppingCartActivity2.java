@@ -1,5 +1,6 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ public class ShoppingCartActivity2 extends AppCompatActivity {
     TextView mTotalPrice;
     RecyclerViewCartAdapter mAdapter;
     List<CartObject> cartObjectList;
+    ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,14 @@ public class ShoppingCartActivity2 extends AppCompatActivity {
         mButtonDelete = (Button) findViewById(R.id.DeleteAllButton);
 
         mRecyclerViewCart.setAdapter(mAdapter);
+        mImageView = (ImageView) findViewById(R.id.BackButton);
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShoppingCartActivity2.this, StoreActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
  //      mButtonDelete.setOnClickListener(new View.OnClickListener() {

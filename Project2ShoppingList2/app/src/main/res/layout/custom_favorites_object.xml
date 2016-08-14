@@ -44,7 +44,7 @@
             android:layout_height="30dp"
             android:text="Add"
             android:id="@+id/QuickAdd"
-            android:background="#8E8E"
+            android:background="@color/colorPrimary"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="0dp"
            android:layout_alignParentEnd="true"

@@ -1,5 +1,7 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,15 @@ public class FavoritesSingleton {
 
     public List<FavoritesObject> getFavoritesList() {
         return mFavoritesList;
+    }
+    public int getFavoritesCount() {
+        int count = 0;
+        for (FavoritesObject favoritesObject:mFavoritesList){
+                count = favoritesObject.getNumInFavoritesList();
+            Log.i(TAG, "getFavoritesCount: " + count);
+
+        }
+        return count;
     }
 
     public void setCustomFavoritesList(List<FavoritesObject> customFavoritesList) {

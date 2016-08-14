@@ -9,13 +9,20 @@
         android:id="@+id/shoppingCartToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#8E8E8E"
+        android:background="@color/colorPrimaryDark"
         android:elevation="4dp"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/AppTheme.PopupOverlay">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/BackButton"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_arrow_back_black_24dp"
+                />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

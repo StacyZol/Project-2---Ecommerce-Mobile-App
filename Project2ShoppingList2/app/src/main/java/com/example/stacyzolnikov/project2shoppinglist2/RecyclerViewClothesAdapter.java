@@ -8,7 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -23,7 +25,7 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
     List<Shirt> shirts;
     Context mContext;
     int mItemXML;
-
+    private static final String TAG = "RecyclerViewClothesAdapter";
 
     public RecyclerViewClothesAdapter() {
 
@@ -54,18 +56,18 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
         final Shirt shirt = shirts.get(position);
         holder.mShirtName.setText(shirts.get(position).getShirtName());
         //int price = shirts.get(position).getPrice();
-       //int cost = shirts.get(position).getPrice();
-              //  "$" + String.valueOf(shirts.get(position).getPrice());
+        //int cost = shirts.get(position).getPrice();
+        //  "$" + String.valueOf(shirts.get(position).getPrice());
         //int cost = Integer.parseInt(String.valueOf(shirts.get(position).getPrice()));
-      //  holder.mPrice.setText("$ " + price);
-       holder.mPrice.setText("$" + shirts.get(position).getPrice());
+        //  holder.mPrice.setText("$ " + price);
+        holder.mPrice.setText("$" + shirts.get(position).getPrice());
         int imageResource = mContext.getResources().getIdentifier(shirts.get(position).getHeart().replace(".png", ""), "drawable", mContext.getPackageName());
         holder.mHeart.setImageResource(imageResource);
         int imageResource2 = mContext.getResources().getIdentifier(shirts.get(position).getShirtPhotosID().replace(".png", ""), "drawable", mContext.getPackageName());
         holder.mShirtPhotos.setImageResource(imageResource2);
 
- //       int imageResource3 = mContext.getResources().getIdentifier(shirts.get(position).getStorePhoto().replace(".png", ""),"drawable", mContext.getPackageName());
- //       holder.mItemHeader.setImageResource(imageResource3);
+        //       int imageResource3 = mContext.getResources().getIdentifier(shirts.get(position).getStorePhoto().replace(".png", ""),"drawable", mContext.getPackageName());
+        //       holder.mItemHeader.setImageResource(imageResource3);
 
         holder.setOnClickListener(new View.OnClickListener() {
 
@@ -77,7 +79,9 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
 
             }
         });
-
+        holder.mAddedHeart.setVisibility(View.INVISIBLE);
+        holder.mHeart.setEnabled(true);
+        holder.mHeart.setVisibility(View.VISIBLE);
         holder.mHeart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,16 +89,47 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
 
                 final FavoritesSingleton favoritesSingleton = FavoritesSingleton.getInstance();
                 favoritesSingleton.addFavoritesObject(new FavoritesObject(shirts.get(position).getShirtName(), shirts.get(position).getShirtName(), shirts.get(position).getPrice()));
+                         holder.mAddedHeart.setVisibility(View.VISIBLE);
+                         holder.mHeart.setEnabled(false);
+                         holder.mHeart.setVisibility(View.GONE);
+                         Log.i(TAG, "Test");
+
+
+
+
+
+
 
 //                shoppingCartSingleton.addCartObject(new CartObject("Testabcd", "123", "blah"));
-              //  Intent intent = new Intent(view.getContext(), FavoritesActivity.class);
-              //  intent.putExtra("position", position);
-              //  view.getContext().startActivity(intent);
+                //  Intent intent = new Intent(view.getContext(), FavoritesActivity.class);
+                //  intent.putExtra("position", position);
+                //  view.getContext().startActivity(intent);
 
             }
         });
 
 
+        //     if (FavoritesSingleton.getInstance().getFavoritesList().size()>0){
+        //         holder.mAddedHeart.setVisibility(View.VISIBLE);
+        //         holder.mHeart.setEnabled(false);
+        //         holder.mHeart.setVisibility(View.VISIBLE);
+        //     }
+        //     else {
+        //         holder.mAddedHeart.setVisibility(View.INVISIBLE);
+        //         holder.mHeart.setEnabled(true);
+        //         holder.mHeart.setVisibility(View.VISIBLE);
+        //     }
+
+
+        //   if (holder.mHeart.isClickable()){
+        //       holder.mAddedHeart.setVisibility(View.VISIBLE);
+        //       holder.mHeart.setEnabled(false);
+        //       holder.mHeart.setVisibility(View.VISIBLE);
+        //   } else {
+        //       holder.mAddedHeart.setVisibility(View.INVISIBLE);
+        //       holder.mHeart.setEnabled(true);
+        //       holder.mHeart.setVisibility(View.VISIBLE);
+        //   }
     }
 
 

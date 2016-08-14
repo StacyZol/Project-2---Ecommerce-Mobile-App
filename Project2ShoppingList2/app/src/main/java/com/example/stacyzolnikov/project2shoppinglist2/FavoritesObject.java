@@ -9,6 +9,7 @@ public class FavoritesObject {
     public String itemName;
     public String itemDescription;
     public String itemPrice;
+    int numInFavoritesList;
 
     public FavoritesObject(String itemName, String itemDescription, String itemPrice) {
         this.itemName = itemName;
@@ -17,6 +18,13 @@ public class FavoritesObject {
     }
 
 
+    public int getNumInFavoritesList() {
+        return numInFavoritesList;
+    }
+
+    public void setNumInFavoritesList(int numInFavoritesList) {
+        this.numInFavoritesList = numInFavoritesList;
+    }
 
     public String getItemName() {
         return itemName;

@@ -47,6 +47,7 @@ public class RecyclerViewFavoritesAdapter extends RecyclerView.Adapter<FavoriteO
     public void onBindViewHolder(FavoriteObjectsViewHolder holder, int position) {
         holder.mItemDescription.setText(mFavoritesList.get(position).getItemDescription());
     holder.mItemName.setText(mFavoritesList.get(position).getItemName());
+        holder.mItemPrice.setText(mFavoritesList.get(position).getItemPrice());
     }
 
     @Override
