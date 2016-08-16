@@ -32,8 +32,8 @@
         <item>Old Navy</item>
     </string-array>
     //this is for the store logos
-    <array name="StoreLogos">
-        <item>@drawable/macys_logo</item>
+    <array name="NurseryLogos">
+
     </array>
 
 </resources>

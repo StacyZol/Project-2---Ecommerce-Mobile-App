@@ -9,7 +9,7 @@ import java.util.List;
  * Created by stacyzolnikov on 7/28/16.
  */
 public class ShoppingCartSingleton {
-    private static final String TAG = "Singleton" ;
+    private static final String TAG = "Singleton";
     List<CartObject> cartObjectList1;
 
     private ShoppingCartSingleton() {
@@ -36,19 +36,51 @@ public class ShoppingCartSingleton {
         this.cartObjectList1 = cartObjectList1;
     }
 
+    public int getObjectCount() {
+        int x = 1;
+        return x;
+    }
+
+    public void removeCartObject(CartObject object) {
+        cartObjectList1.remove(object);
+    }
+
     public void addCartObject(CartObject object) {
         cartObjectList1.add(object);
     }
-    public Double getTotalPrice () {
+
+    public Double getTotalPrice() {
         Double totalCost = 0.0;
         for (CartObject cartObject : cartObjectList1) {
-            //totalCost += cartObjectList1.size() * Double.parseDouble(cartObject.getPrice());
-            totalCost = totalCost + Double.parseDouble(cartObject.getPrice());
-            Log.d(TAG, "getTotalPrice: Test");
+            Double cost = ((double)(cartObject.getmQuantity()) * Double.parseDouble(cartObject.getPrice()));
+            totalCost = totalCost + cost;
+            //totalCost = totalCost + Double.parseDouble(cartObject.getPrice());
+
+            Log.d(TAG, "getTotalPrice:Qiantity" + cartObject.getmQuantity());
             Log.i(TAG, "getTotalPrice: totalcost" + totalCost);
+
+
+
         }
         return totalCost;
 
-    }
 
     }
+
+    public int getCount() {
+        int totalCount = 0;
+        for (CartObject cartObject:cartObjectList1){
+            totalCount = totalCount + cartObject.getmQuantity();
+            Log.i(TAG, "getCount: " + totalCount);
+        }
+        return totalCount;
+    }
+
+
+
+
+
+
+
+
+}

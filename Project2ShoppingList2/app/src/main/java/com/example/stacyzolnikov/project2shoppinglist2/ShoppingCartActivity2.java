@@ -1,6 +1,5 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-public class ShoppingCartActivity2 extends AppCompatActivity {
+public class ShoppingCartActivity2 extends AppCompatActivity implements RecyclerViewCartAdapter.OnChangeQuantityListener {
     private static final String TAG = "ShoppingCart";
     RecyclerView mRecyclerViewCart;
     Button mButtonDelete, mButtonBack, mButtonCheckout;
@@ -31,11 +30,20 @@ public class ShoppingCartActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart2);
-        ShoppingCartSingleton singleton = ShoppingCartSingleton.getInstance();
+        final ShoppingCartSingleton singleton = ShoppingCartSingleton.getInstance();
 
 
+        updateList();
+        Log.i(TAG, "onCreate: TotalPrice:" + ShoppingCartSingleton.getInstance().getTotalPrice());
         mTotalPrice = (TextView) findViewById(R.id.shoppingCartTotalCost);
         mTotalPrice.setText("$" + String.format(Locale.ENGLISH, "%.2f", ShoppingCartSingleton.getInstance().getTotalPrice()));
+//        mAdapter.notifyDataSetChanged();
+
+
+        double totalPrice = ShoppingCartSingleton.getInstance().getTotalPrice();
+        int count = ShoppingCartSingleton.getInstance().getCount();
+
+
 
         cart = UserCart.getInstance();
         //set listview or recyclerview
@@ -45,17 +53,26 @@ public class ShoppingCartActivity2 extends AppCompatActivity {
 
         cartObjectList = (List<CartObject>) singleton.getCartObjectList1();
 
-        mAdapter = new RecyclerViewCartAdapter(singleton.getCartObjectList1());
+        //mAdapter = new RecyclerViewCartAdapter(singleton.getCartObjectList1());
 
+
+
+
+
+
+
+        mAdapter = new RecyclerViewCartAdapter(singleton.getCartObjectList1(),ShoppingCartActivity2.this, this);
         mButtonDelete = (Button) findViewById(R.id.DeleteAllButton);
-
         mRecyclerViewCart.setAdapter(mAdapter);
         mImageView = (ImageView) findViewById(R.id.BackButton);
+
+
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShoppingCartActivity2.this, StoreActivity.class);
-                startActivity(intent);
+                finish();
+                //Intent intent = new Intent(ShoppingCartActivity2.this, StoreActivity.class);
+               // startActivity(intent);
             }
         });
 
@@ -81,6 +98,7 @@ public class ShoppingCartActivity2 extends AppCompatActivity {
                     final List<CartObject> temp = new LinkedList<CartObject>(cartObjectList);
                     cartObjectList.clear();
                     mAdapter.notifyDataSetChanged();
+
                     mTotalPrice.setText("$" + String.format(Locale.ENGLISH, "%.2f", ShoppingCartSingleton.getInstance().getTotalPrice()));
                     Snackbar.make(mRecyclerViewCart, "Removed all items from basket.", Snackbar.LENGTH_LONG).
                             setAction("Undo", new View.OnClickListener() {
@@ -90,19 +108,56 @@ public class ShoppingCartActivity2 extends AppCompatActivity {
                                     cartObjectList = temp;
                                     mAdapter.setCartObjectList1(cartObjectList);
                                     mAdapter.notifyItemRangeInserted(0, cartObjectList.size());
+                                    singleton.getCartObjectList1().addAll(temp);
                                     mTotalPrice.setText("$" + String.format(Locale.ENGLISH, "%.2f", ShoppingCartSingleton.getInstance().getTotalPrice()));
-
+                                   // finish();
+                                   // startActivity(getIntent());
                                 }
                             })
                             .show();
                     mAdapter.notifyDataSetChanged();
+
                 }
             }
         });
 
   }
 
+    public void onResume () {
+    super.onResume();
+        mTotalPrice.setText("$" + String.format(Locale.ENGLISH, "%.2f", ShoppingCartSingleton.getInstance().getTotalPrice()));
 
+    }
+    public void updateList() {
+        // mAdapter.updateList();
+        //mAdapter.notifyDataSetChanged();
+        //mTotalPrice.setText("$" + String.format(Locale.ENGLISH, "%.2f", ShoppingCartSingleton.getInstance().getTotalPrice()));
+
+    }
+
+
+
+    @Override
+    public void OnChangeQuantity() {
+        mAdapter.setChangeQuantityListener(this);
+        mTotalPrice.setText("$" + String.format(Locale.ENGLISH, "%.2f", ShoppingCartSingleton.getInstance().getTotalPrice()));
+    }
+
+
+    //  @Override
+ //  public double OnChangeQuantity(double total) {
+ //      return ShoppingCartSingleton.getInstance().getTotalPrice();
+ //  }
+
+  // @Override
+  // public void OnChangeQuantity(double total) {
+
+  // }
+
+  // @Override
+  // public double onChangeQuantity() {
+  //     return ShoppingCartSingleton.getInstance().getTotalPrice();
+  // }
 }
 
 

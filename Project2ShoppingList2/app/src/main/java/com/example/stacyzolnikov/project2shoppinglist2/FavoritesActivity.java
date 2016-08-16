@@ -62,8 +62,7 @@ mImageView = (ImageView) findViewById(R.id.BackButton);
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FavoritesActivity.this, StoreActivity.class);
-                startActivity(intent);
+               finish();
             }
         });
     }

@@ -7,12 +7,37 @@ public class CartObject {
     public String shirtName;
     public String price;
     public String shirtPhotosID;
+    public String itemTotal;
+    public int mQuantity = 1;
 
     public CartObject (String shirtName, String price, String shirtPhotosID){
         this.shirtName = shirtName;
         this.shirtPhotosID = shirtPhotosID;
         this.price = price;
 
+
+    }
+
+    public CartObject (String shirtName, String price, String shirtPhotosID, int quantity, String itemTotal){
+        this.shirtName = shirtName;
+        this.shirtPhotosID = shirtPhotosID;
+        this.price = price;
+        this.mQuantity = quantity;
+        this.itemTotal = itemTotal;
+
+    }
+    //need to fix below, the dialog isn't reading the cartobject quantity of 1
+    public CartObject(){
+        this.mQuantity = 1;
+
+    }
+
+    public String getItemTotal() {
+        return itemTotal;
+    }
+
+    public void setItemTotal(String itemTotal) {
+        this.itemTotal = itemTotal;
     }
 
     public String getShirtName() {
@@ -37,5 +62,17 @@ public class CartObject {
 
     public void setShirtPhotosID(String shirtPhotosID) {
         this.shirtPhotosID = shirtPhotosID;
+    }
+
+  //  public void setQuantity(int mQuantity) {
+   //     this.mQuantity = mQuantity;
+   // }
+
+    public int getmQuantity() {
+        return mQuantity;
+    }
+
+    public void setmQuantity(int mQuantity) {
+        this.mQuantity = mQuantity;
     }
 }

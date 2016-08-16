@@ -16,6 +16,8 @@ public class  CartObjectViewHolder extends RecyclerView.ViewHolder {
     public TextView mShirtPhotos;
     public CardView mCardView;
     ImageView mChangeQuantity;
+    TextView mItemQuantity;
+    TextView mItemTotal;
 
 
     public CartObjectViewHolder(View itemView) {
@@ -24,6 +26,8 @@ public class  CartObjectViewHolder extends RecyclerView.ViewHolder {
         mPrice = (TextView) itemView.findViewById(R.id.cartPerUnitPrice);
         mCardView = (CardView) itemView.findViewById(R.id.CustomCartItemView);
         mChangeQuantity = (ImageView) itemView.findViewById(R.id.cartItemsPlus_Minus);
+        mItemQuantity = (TextView) itemView.findViewById(R.id.cartItemQuantity);
+        mItemTotal = (TextView) itemView.findViewById(R.id.cartTotalPrice);
       //  mShirtName = (TextView) itemView.findViewById(R.id.ItemPhotosID)
     }
     

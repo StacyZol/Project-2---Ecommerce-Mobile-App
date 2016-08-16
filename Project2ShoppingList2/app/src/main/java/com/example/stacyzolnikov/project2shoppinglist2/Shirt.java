@@ -12,6 +12,7 @@ public class Shirt {
     private String shirtPhotosID;
     private String storeNameShirt;
     private String storePhoto;
+    private int quantity;
 
     public Shirt (int id, String shirtName, String heart, String price, String shirtPhotosID, String storeNameShirt){
         this.id = id;
@@ -22,6 +23,15 @@ public class Shirt {
         this.storeNameShirt = storeNameShirt;
 
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public Shirt (String shirtName, String heart, String price, String shirtPhotosID, String storeNameShirt){
         this.shirtName = shirtName;
         this.shirtPhotosID = shirtPhotosID;
