@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         databaseHelper.addToShirts();
 
+
         //This is to go from the Main Home Page to the second activity
         mButtonLetsGo = (Button) findViewById(R.id.LetsGoButton);
         mButtonLetsGo.setOnClickListener(new View.OnClickListener() {

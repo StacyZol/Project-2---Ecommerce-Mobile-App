@@ -1,28 +1,22 @@
 package com.example.stacyzolnikov.project2shoppinglist2;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by stacyzolnikov on 7/26/16.
  */
-public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesViewHolder> {
-    List<Shirt> shirts;
+public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<TreesViewHolder> {
+    List<Tree> trees;
     Context mContext;
     int mItemXML;
     private static final String TAG = "RecyclerViewClothesAdapter";
@@ -32,41 +26,42 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
     }
 
 
-    public RecyclerViewClothesAdapter(List<Shirt> shirts, int itemLayout, Context context) {
-        this.shirts = shirts;
+    public RecyclerViewClothesAdapter(List<Tree> trees, int itemLayout, Context context) {
+        this.trees = trees;
         this.mItemXML = itemLayout;
         this.mContext = context;
     }
-    public RecyclerViewClothesAdapter(List<Shirt> shirts, Context context) {
-        this.shirts = shirts;
+
+    public RecyclerViewClothesAdapter(List<Tree> trees, Context context) {
+        this.trees = trees;
         this.mContext = context;
     }
 
     @Override
-    public ClothesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TreesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View parentView = inflater.inflate(R.layout.custom_items_view, parent, false);
-        ClothesViewHolder viewHolder = new ClothesViewHolder(parentView);
+        TreesViewHolder viewHolder = new TreesViewHolder(parentView);
         mContext = parent.getContext();
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final ClothesViewHolder holder, final int position) {
-        final Shirt shirt = shirts.get(position);
-        holder.mShirtName.setText(shirts.get(position).getShirtName());
-        //int price = shirts.get(position).getPrice();
-        //int cost = shirts.get(position).getPrice();
-        //  "$" + String.valueOf(shirts.get(position).getPrice());
-        //int cost = Integer.parseInt(String.valueOf(shirts.get(position).getPrice()));
+    public void onBindViewHolder(final TreesViewHolder holder, final int position) {
+        final Tree tree = trees.get(position);
+        holder.mShirtName.setText(trees.get(position).getShirtName());
+        //int price = trees.get(position).getPrice();
+        //int cost = trees.get(position).getPrice();
+        //  "$" + String.valueOf(trees.get(position).getPrice());
+        //int cost = Integer.parseInt(String.valueOf(trees.get(position).getPrice()));
         //  holder.mPrice.setText("$ " + price);
-        holder.mPrice.setText("$" + shirts.get(position).getPrice());
-        int imageResource = mContext.getResources().getIdentifier(shirts.get(position).getHeart().replace(".png", ""), "drawable", mContext.getPackageName());
+        holder.mPrice.setText("$" + trees.get(position).getPrice());
+        int imageResource = mContext.getResources().getIdentifier(trees.get(position).getHeart().replace(".png", ""), "drawable", mContext.getPackageName());
         holder.mHeart.setImageResource(imageResource);
-        int imageResource2 = mContext.getResources().getIdentifier(shirts.get(position).getShirtPhotosID().replace(".png", ""), "drawable", mContext.getPackageName());
+        int imageResource2 = mContext.getResources().getIdentifier(trees.get(position).getShirtPhotosID().replace(".png", ""), "drawable", mContext.getPackageName());
         holder.mShirtPhotos.setImageResource(imageResource2);
 
-        //       int imageResource3 = mContext.getResources().getIdentifier(shirts.get(position).getStorePhoto().replace(".png", ""),"drawable", mContext.getPackageName());
+        //       int imageResource3 = mContext.getResources().getIdentifier(trees.get(position).getStorePhoto().replace(".png", ""),"drawable", mContext.getPackageName());
         //       holder.mItemHeader.setImageResource(imageResource3);
 
         holder.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +69,7 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
             @Override
             public void onClick(View view) {
                 FragmentManager fm = ((AppCompatActivity) mContext).getSupportFragmentManager();
-                AddToCartDialogFragment addToCart = new AddToCartDialogFragment(shirts, position);
+                AddToCartDialogFragment addToCart = new AddToCartDialogFragment(trees, position);
                 addToCart.show(fm, "add_to_cart");
 
             }
@@ -88,16 +83,11 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
                 Toast.makeText(mContext, "Added To Favorites", Toast.LENGTH_LONG).show();
 
                 final FavoritesSingleton favoritesSingleton = FavoritesSingleton.getInstance();
-                favoritesSingleton.addFavoritesObject(new FavoritesObject(shirts.get(position).getShirtName(), shirts.get(position).getShirtName(), shirts.get(position).getPrice()));
-                         holder.mAddedHeart.setVisibility(View.VISIBLE);
-                         holder.mHeart.setEnabled(false);
-                         holder.mHeart.setVisibility(View.GONE);
-                         Log.i(TAG, "Test");
-
-
-
-
-
+                favoritesSingleton.addFavoritesObject(new FavoritesObject(trees.get(position).getShirtName(), trees.get(position).getShirtName(), trees.get(position).getPrice()));
+                holder.mAddedHeart.setVisibility(View.VISIBLE);
+                holder.mHeart.setEnabled(false);
+                holder.mHeart.setVisibility(View.GONE);
+                Log.i(TAG, "Test");
 
 
 //                shoppingCartSingleton.addCartObject(new CartObject("Testabcd", "123", "blah"));
@@ -135,10 +125,10 @@ public class RecyclerViewClothesAdapter extends RecyclerView.Adapter<ClothesView
 
     @Override
     public int getItemCount() {
-        if (shirts == null) {
+        if (trees == null) {
             return 0;
         } else {
-            return shirts.size();
+            return trees.size();
 
         }
     }

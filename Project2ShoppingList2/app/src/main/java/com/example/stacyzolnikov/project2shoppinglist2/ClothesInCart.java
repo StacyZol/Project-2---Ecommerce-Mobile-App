@@ -3,13 +3,13 @@ package com.example.stacyzolnikov.project2shoppinglist2;
 /**
  * Created by stacyzolnikov on 8/8/16.
  */
-public class ClothesInCart extends Shirt {
+public class ClothesInCart extends Tree {
     long mUserId;
     int mQuantity;
     //Not being Used
 
-    public ClothesInCart(Shirt shirt, int quantity, long userId){
-        super(shirt.getId(), shirt.getShirtName(), shirt.getHeart(), shirt.getPrice(), shirt.getShirtPhotosID(), shirt.getStoreNameShirt());
+    public ClothesInCart(Tree tree, int quantity, long userId){
+        super(tree.getId(), tree.getShirtName(), tree.getHeart(), tree.getPrice(), tree.getShirtPhotosID(), tree.getStoreNameShirt());
         this.mQuantity = quantity;
         this.mUserId = userId;
     }

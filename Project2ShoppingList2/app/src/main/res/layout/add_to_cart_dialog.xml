@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.stacyzolnikov.project2shoppinglist2.AddToCartDialogFragment">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/tree"/>
+
     <Button
         android:layout_width="180dp"
         android:layout_height="80dp"
         android:text="Add to Cart"
         android:textSize="25dp"
-        android:layout_gravity="top|center_horizontal"
+        android:layout_gravity="top"
         android:layout_marginTop="0dp"
-        android:background="@drawable/shape"
         android:textColor="#FFFFFF"
         android:id="@+id/AddToCart"
+        android:layout_toLeftOf="@+id/NevermindID"
         android:textAppearance="?android:attr/textAppearanceMedium"
         />
     <Button
@@ -26,11 +23,10 @@
         android:text="Cancel"
         android:textSize="30dp"
         android:layout_marginTop="0dp"
-        android:background="@drawable/shape"
         android:textColor="#FFFFFF"
-       android:layout_gravity="bottom|center_horizontal"
+       android:layout_gravity="right"
         android:id="@+id/NevermindID"
         android:textAppearance="?android:attr/textAppearanceMedium"
         />
 
-  </FrameLayout>
+  </LinearLayout>

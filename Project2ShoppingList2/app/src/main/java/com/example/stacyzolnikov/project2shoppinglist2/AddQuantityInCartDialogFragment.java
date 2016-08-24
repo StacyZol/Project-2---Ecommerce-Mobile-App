@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class AddQuantityInCartDialogFragment extends DialogFragment {
     public Button mButtonSave;
     public Button mButtonCancel;
     public NumberPicker mNumberPicker;
-    List<Shirt> mShirts;
+    List<Tree> mTrees;
     int position;
     Context mContext;
 
@@ -30,8 +29,8 @@ public class AddQuantityInCartDialogFragment extends DialogFragment {
         this.mButtonCancel = mButtonCancel;
         this.mNumberPicker = mNumberPicker;
     }
-   // public AddQuantityInCartDialogFragment (List<Shirt> mShirts, int position) {
-   //     this.mShirts = mShirts;
+   // public AddQuantityInCartDialogFragment (List<Tree> mTrees, int position) {
+   //     this.mTrees = mTrees;
    //     this.position=position;
    // }
 
@@ -71,7 +70,7 @@ public class AddQuantityInCartDialogFragment extends DialogFragment {
         mNumberPicker = (NumberPicker) view.findViewById(R.id.numPicker);
 
         final ShoppingCartSingleton shoppingCartSingleton = ShoppingCartSingleton.getInstance();
-        final Shirt cartObject = mShirts.get(position);
+        final Tree cartObject = mTrees.get(position);
         mNumberPicker.setMaxValue(100);
         mNumberPicker.setMinValue(0);
         mNumberPicker.setWrapSelectorWheel(false);

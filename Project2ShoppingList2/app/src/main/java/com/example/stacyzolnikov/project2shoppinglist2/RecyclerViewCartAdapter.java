@@ -117,7 +117,7 @@ public class RecyclerViewCartAdapter extends RecyclerView.Adapter<CartObjectView
 
             public void show(final CartObject cartObject, final int position) {
 
-                Toast.makeText(mContext, "Change Quantity", Toast.LENGTH_LONG).show();
+                //Toast.makeText(mContext, "Change Quantity", Toast.LENGTH_LONG).show();
                 final Dialog cartDialog = new Dialog(mContext);
                 cartDialog.setTitle("Change Quantity");
                 cartDialog.setContentView(R.layout.add_quantity_in_cart_dialog);

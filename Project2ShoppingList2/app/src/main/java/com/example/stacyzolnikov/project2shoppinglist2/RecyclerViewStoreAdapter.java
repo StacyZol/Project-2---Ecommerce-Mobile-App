@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filterable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,7 @@ public class RecyclerViewStoreAdapter extends RecyclerView.Adapter<StoreViewHold
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ClothesActivity.class);
+                Intent intent = new Intent(view.getContext(), ItemsActivity.class);
                 intent.putExtra("position", DatabaseHelper.COL_STORE_LOGO);
                 view.getContext().startActivity(intent);
 

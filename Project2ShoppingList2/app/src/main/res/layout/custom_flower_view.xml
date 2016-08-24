@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/CustomFlowerView"
+    app:cardElevation="4dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    app:cardBackgroundColor="#FFFFFF"
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="#000000"
+            android:layout_margin="8dp"
+            android:id="@+id/FlowerPhotosID"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:layout_marginBottom="10dp"
+            android:layout_alignTop="@+id/FlowerPhotosID"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:id="@+id/FlowerNameID"
+            android:layout_toRightOf="@+id/FlowerPhotosID"
+            />
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:text="Add"
+            android:background="@color/colorPrimary"
+            android:layout_toRightOf="@+id/FlowerNameID"
+            android:layout_alignTop="@+id/FlowerPhotosID"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:id="@+id/FlowerQuickAdd"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="Description..."
+            android:textSize="13dp"
+            android:id="@+id/FlowerDescriptionsID"
+            android:layout_below="@+id/FlowerNameID"
+            android:layout_toRightOf="@+id/FlowerPhotosID"
+            />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="28dp"
+            android:background="@drawable/ic_loyalty_black_24dp"
+            android:id="@+id/FlowerHeartID"
+            android:layout_alignBottom="@+id/FlowerPhotosID"
+            android:layout_toRightOf="@+id/FlowerPhotosID"
+            android:layout_marginTop="35dp"
+            android:layout_below="@+id/FlowerNameID"
+
+            />
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="28dp"
+            android:background="@drawable/ic_loyalty_black_24dp1"
+            android:id="@+id/FlowerHeartIDFaded"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_below="@+id/FlowerNameID"
+            android:visibility="invisible"
+            />
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:background="#FFFFFF"
+            android:id="@+id/FlowerPriceID"
+            android:text="$99.99"
+            android:textColor="#000000"
+            android:layout_alignBottom="@+id/FlowerPhotosID"
+            android:layout_toRightOf="@+id/FlowerHeartID"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="8dp"
+            android:layout_below="@+id/FlowerDescriptionsID"
+
+            />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="10dp"
+            android:text="# of Reviews"
+            android:textColor="#000"
+            android:textSize="13dp"
+            android:textStyle="italic|bold"
+            android:layout_toRightOf="@+id/FlowerPriceID"
+            android:layout_below="@+id/FlowerDescriptionsID"
+            android:layout_alignBottom="@+id/FlowerPhotosID"
+            android:layout_marginTop="20dp"
+            />
+
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

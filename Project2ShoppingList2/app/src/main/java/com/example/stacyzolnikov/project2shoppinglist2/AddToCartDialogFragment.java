@@ -3,18 +3,13 @@ package com.example.stacyzolnikov.project2shoppinglist2;
 
 
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,7 +23,7 @@ public class AddToCartDialogFragment extends DialogFragment {
     public Button mButton;
     public Button mButton2;
     public ImageView itemPhoto;
-    List<Shirt> shirts;
+    List<Tree> trees;
     int position;
 
     public AddToCartDialogFragment () {
@@ -36,8 +31,8 @@ public class AddToCartDialogFragment extends DialogFragment {
     }
 
 
-    public AddToCartDialogFragment (List<Shirt> shirts, int position) {
-        this.shirts = shirts;
+    public AddToCartDialogFragment (List<Tree> trees, int position) {
+        this.trees = trees;
         this.position = position;
 
     }
@@ -78,7 +73,7 @@ public class AddToCartDialogFragment extends DialogFragment {
 
             @Override
             public void onClick(View view) {
-                shoppingCartSingleton.addCartObject(new CartObject(shirts.get(position).getShirtName(), shirts.get(position).getPrice(), shirts.get(position).getShirtPhotosID()));
+                shoppingCartSingleton.addCartObject(new CartObject(trees.get(position).getShirtName(), trees.get(position).getPrice(), trees.get(position).getShirtPhotosID()));
 //                shoppingCartSingleton.addCartObject(new CartObject("Testabcd", "123", "blah"));
                 getDialog().dismiss();
                 Toast.makeText(getContext(), "Added to Cart", Toast.LENGTH_LONG).show();
